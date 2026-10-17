@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>FM26 연예인 커리어 도우미</title>
+<style>
+:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#e9eaf3;background:#111323;color-scheme:dark}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:36px 22px 70px}h1{font-size:32px;letter-spacing:-1px;margin:12px 0}h2{font-size:21px}p,li{line-height:1.8}.muted{color:#aeb5cd;font-size:14px}.tag{color:#9ce4c4;letter-spacing:2px;font-size:12px}section{background:#1c2035;border:1px solid #333952;border-radius:16px;padding:24px;margin-top:20px}.note{border-left:3px solid #ffca87;padding-left:15px;color:#ffddb0}label{display:block;margin:13px 0 7px}input,textarea,button{font:inherit}input[type=text],input[type=date],input[type=number],textarea{background:#111628;border:1px solid #5d6689;border-radius:7px;padding:10px;color:#fff;width:100%}input[type=file]{max-width:100%}textarea{min-height:180px;resize:vertical;font-size:13px}button{background:#a8e4c8;color:#0f3024;border:0;border-radius:7px;padding:11px 16px;font-weight:700;margin:6px 8px 6px 0;cursor:pointer}button:disabled{opacity:.4;cursor:default}.secondary{background:#323c5a;color:#e9eaf3}a{color:#a8e4c8}.row{display:flex;gap:20px;flex-wrap:wrap}.row>div{flex:1;min-width:180px}.status{white-space:pre-wrap;overflow-wrap:anywhere;color:#d1e9de;margin-top:15px;line-height:1.7}.error{color:#ffb3b3}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;border-bottom:1px solid #3d4564;padding:10px;overflow-wrap:anywhere}.scroll{overflow:auto;max-height:440px}code{overflow-wrap:anywhere}summary{cursor:pointer}details{margin-top:16px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card{background:#14192b;padding:16px;border-radius:10px}:focus-visible{outline:3px solid #ffca87;outline-offset:3px}.preview{width:48px;height:48px;object-fit:contain}footer{margin-top:25px}
+</style>
+<script src="core.js" defer></script><script src="career-core.js" defer></script><script src="catalog.js" defer></script><script src="career-app.js" defer></script>
+</head>
+<body><main>
+<div class="tag">FM26 · CELEBRITY CAREER COMPANION</div>
+<h1>시즌이 바뀌어도, 연예인과 함께</h1>
+<p>새 유소년에게 이름·사진을 배정하고 기록을 이어갑니다. 구단을 옮겨도 같은 세이브 기록을 사용하세요. 파일은 내 브라우저에서만 처리합니다.</p>
+<p class="note"><strong>게임에서 이미 생성된 선수의 실제 ID가 필요합니다.</strong> 얼굴팩 ZIP과 이름·나이·능력치 수정 목록을 만듭니다. 이름·나이·능력치는 인게임 에디터에서 직접 바꾸어야 하며, 선수 생성·은퇴 방지·게임 자동 편집 기능은 없습니다.</p>
+<div class="cards"><div class="card">기존 사진 재사용 가능<br><strong>필수 추가 사진 0장</strong></div><div class="card">기본 이름·사진 목록<br><strong id="poolCount">불러오는 중</strong></div><div class="card">기존 ID 밀림 점검<br><strong>실제 이름·ID로 다시 연결</strong></div></div>
+<section><h2>1. 세이브와 시즌 기록</h2>
+<div class="row"><div><label for="saveKey">세이브 구분 이름</label><input id="saveKey" type="text" placeholder="예: SM_장기커리어"></div><div><label for="gameDate">현재 게임 날짜</label><input id="gameDate" type="date" value="2025-07-01"></div></div>
+<label for="stateFile">지난번 career-state.json (첫 사용은 생략)</label><input id="stateFile" type="file" accept=".json,application/json">
+<p class="muted">새 세이브는 다른 이름을 사용하세요. 매번 처리한 뒤 기록 JSON을 내려받아 보관합니다. 브라우저에 자동 저장하지 않습니다. 과거 세이브로 돌아가면 그 시점의 기록도 함께 사용하세요.</p>
+<p id="stateStatus" class="status" role="status"></p></section>
+<section><h2>2. 실제 선수 목록</h2>
+<p>CSV에 <code>id,name,club,age,gender,newgen,ca,pa,dob</code> 머리글을 사용합니다. 필수값은 실제 ID와 이름입니다. 자동 배정은 <strong>여성으로 표시되고, 21세 이하이며, 유소년으로 표시된 선수</strong>만 대상으로 합니다.</p>
+<input id="rosterFile" type="file" accept=".csv,.tsv,.html,.htm,text/csv,text/html"><label for="roster">또는 CSV 붙여넣기</label><textarea id="roster" spellcheck="false" placeholder="샘플 형식 버튼으로 입력 예시를 확인하세요. 가상의 예시 ID는 실제 게임에 적용하지 마세요."></textarea>
+<button id="sample" class="secondary">샘플 형식 보기</button>
+<p class="muted">성별: F 또는 여자 / 유소년: 1 또는 true. CA·PA·생년월일은 선택 사항입니다. 생년월일은 YYYY-MM-DD. 고유 ID·이름·나이·구단 등의 한국어 머리글도 인식합니다. 게임에서 웹 페이지로 출력한 표가 있다면 HTML 파일도 읽을 수 있습니다. 실제 ID가 없는 출력물에는 ID를 추가해야 합니다.</p>
+<label><input id="explicitFemale" type="checkbox"> 성별 빈칸은 여성 선수입니다 (여자 선수만 있는 목록에서 사용)</label>
+<label><input id="explicitYouth" type="checkbox"> 이 목록은 전원 유소년입니다 (newgen 빈칸만 유소년으로 처리)</label>
+<label><input id="onlyUnseen" type="checkbox" checked> 지난 기록에서 본 적 없는 ID만 새로 배정</label>
+<p id="rosterStatus" class="status" role="status"></p></section>
+<section><h2>3. 사진과 연예인 이름 목록</h2>
+<label for="photos">기존 얼굴팩의 celeb 폴더</label><input id="photos" type="file" webkitdirectory directory multiple accept=".png,image/png">
+<p class="muted">기본 목록은 사진 아래에 적힌 이름을 직접 읽어 확인한 118장입니다. 얼굴 인식이나 파일 번호 추정으로 이름을 붙이지 않았습니다. 목록에 있는 원본 PNG는 SHA-256도 대조합니다. 현재 갖고 있는 파일을 선택하면 되며 사진을 다시 받을 필요는 없습니다.</p>
+<label for="customCatalog">내 연예인 목록 CSV (선택, 기본 목록 대신 사용)</label><input id="customCatalog" type="file" accept=".csv,text/csv">
+<p class="muted"><code>name,path,sha256</code> 머리글을 사용합니다. path는 선택한 폴더 안의 PNG 상대 경로, sha256은 모르면 빈칸입니다. 새 사진과 이름을 추가하면 다음 배정부터 사용할 수 있습니다. 기존 배정은 기록에 남습니다.</p>
+<label><input id="reuse" type="checkbox" checked> 목록을 모두 사용하면 같은 연예인 이름·사진 재사용</label>
+<p id="photoStatus" class="status" role="status"></p>
+<button id="assign">이번 목록의 유소년 배정</button><button id="snapshot" class="secondary">기준 선수 목록만 기록</button><button id="fixExisting" class="secondary">기존 선수 사진 밀림 대조</button>
+<p class="muted">첫 시즌에는 기존 여성 선수 목록을 넣고 ‘기준 선수 목록만 기록’을 누른 뒤 JSON을 저장하세요. 이 버튼은 연예인 배정을 하지 않습니다. 이후 유소년 입단 때 해당 유소년 목록과 지난 JSON을 사용하면 됩니다.</p>
+<p class="muted">밀림 대조는 실제 선수 이름과 사진의 확인된 이름이 정확히 같은 경우만 연결합니다. 동명이인·약칭·목록에 없는 사진은 자동 처리하지 않습니다. 기존 생성 선수는 r-ID, 기본 DB 선수는 숫자 ID로 출력하므로 내보내기 전 선수 종류를 확인하세요.</p>
+<p id="actionStatus" class="status" role="alert"></p></section>
+<section><h2>4. 배정 결과와 내보내기</h2>
+<div class="scroll"><table><thead><tr><th>사진</th><th>ID</th><th>기존 이름</th><th>배정 이름</th><th>사진 경로</th></tr></thead><tbody id="results"></tbody></table></div>
+<label><input id="regenPrefix" type="checkbox" checked> 선택한 선수는 생성 선수입니다 (config에 r-ID 사용)</label>
+<label for="batch">얼굴팩 묶음 번호 (한 묶음 최대 300명)</label><input id="batch" type="number" min="1" step="1" value="1">
+<button id="faceZip" disabled>선택 묶음 얼굴팩 ZIP</button><button id="names" disabled class="secondary">전체 이름 수정 목록 CSV</button><button id="saveState" disabled class="secondary">시즌 기록 JSON 저장</button>
+<p class="muted">ZIP의 config.xml과 faces 폴더를 함께 그래픽 폴더 안의 별도 폴더에 넣습니다. 같은 ID가 있는 이전 시즌 도우미 폴더는 빼고 교체해 중복을 피하세요. 다른 얼굴팩에 같은 ID가 있으면 로딩 순서에 의존하지 말고 그 매핑을 백업 후 제외하세요. 게임의 캐시·그래픽 새로고침을 실행하고 확인합니다.</p>
+<p class="note">CSV는 게임이 자동으로 읽는 파일이 아닙니다. 배정 이름을 인게임 에디터의 이름 항목 또는 게임의 별명 기능으로 직접 입력해야 합니다. 별명은 표시 범위가 다를 수 있습니다. 사진을 연결해도 원래 이름은 그대로입니다.</p>
+<p id="exportStatus" class="status" role="status"></p></section>
+<section><h2>5. 기존 선수 장기 유지 점검</h2>
+<p>첫 기록의 CA·PA를 기준으로 현재 능력치 하락과 고령 선수를 찾습니다. 첫 기록에 없던 선수는 새 기준으로 등록됩니다. 이미 일어난 은퇴를 되돌리지는 못합니다.</p>
+<div class="row"><div><label for="ageCap">이 나이부터 점검</label><input id="ageCap" type="number" value="28" min="25" max="50"></div><div><label for="targetAge">되돌릴 나이</label><input id="targetAge" type="number" value="22" min="18" max="49"></div></div>
+<button id="maintenance" class="secondary">인게임 에디터 작업 목록 CSV</button>
+<p class="muted">대상은 입력 목록의 여성 선수 전체입니다. 생년월일 변경 제안과 원래 CA·PA를 적어 줍니다. 세부 능력치는 따로 저장·복원하지 않으므로 CA만 바꿔도 같은 분배가 복원되지는 않습니다. 경기 진행 전 별도 저장 후 에디터에서 확인하며 조정하세요.</p>
+<p id="maintStatus" class="status" role="status"></p></section>
+<section><h2>커리어를 오래 즐기는 선택 규칙</h2><p>5시즌마다 다른 소속사로 옮기기, 6부 팀으로 FA 바스 우승 후 승격하기, 연예인 유소년 5명을 1군에 정착시키기, 리그·컵 동시 우승 후 새 구단에 도전하기. 도구의 세이브 이름을 유지하면 감독이 이적해도 사진 배정은 이어집니다.</p><p><a href="face.html">ID를 직접 입력해 사진을 고르는 간단 도구 열기</a></p></section>
+<footer class="muted">컵·국적·시작 나이 XML은 ZIP의 editor 폴더와 START_HERE.txt를 참고하세요. 이 도구는 게임 메모리나 세이브 파일에 접근하지 않습니다.</footer>
+</main></body></html>

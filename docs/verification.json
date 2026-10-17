@@ -1,0 +1,25 @@
+{
+  "scope": "Static tools and file verification; no FM26 runtime",
+  "javascript_tests": {"pass": 21, "fail": 0, "skip": 0, "includes_original_photo_fixture": true},
+  "python_tests": {"pass": 3, "fail": 0, "includes_field_preservation_and_reproducible_xml": true},
+  "browser": {
+    "engine": "Chromium on Linux",
+    "real_player_photo_selection": 963,
+    "zip_crc": "pass",
+    "photo_sha256": "pass",
+    "state_json_roundtrip": "pass",
+    "next_season_and_club_change": "pass",
+    "maintenance_csv": "pass",
+    "korean_html_table_import": "pass",
+    "page_errors": []
+  },
+  "fmf": {"changed": false, "source": "User-saved ai update.fmf", "sha256": "54225f7fea315c3a0b48ee64ab7794964bd5c398af0f4feeaf96d436e0120caf"},
+  "not_verified": [
+    "Windows file double-click browser use",
+    "New age and nationality XML import/compilation in FM26 Editor",
+    "Whether all three new cups exist in the user's opaque saved FMF",
+    "30 seasons in the actual game",
+    "International tournaments and club nationality restrictions",
+    "Runtime name editing, aging prevention, retirement prevention and annual celebrity generation"
+  ]
+}

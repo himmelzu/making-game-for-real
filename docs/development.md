@@ -1,0 +1,35 @@
+# 개발 환경과 재생성
+
+정적 HTML/JavaScript와 Python 표준 라이브러리만 사용합니다. 일반 도구 사용에는 Windows의 Edge/Chrome이면 됩니다. 상시 서버, npm 설치, 비밀키는 필요 없습니다.
+
+개발 검사는 Python 3.10 이상과 Node 18 이상에서 실행합니다.
+
+```bash
+bash .codex/setup.sh
+```
+
+원본 사진까지 확인하는 추가 검사:
+
+```bash
+FM26_FACE_TEST_SOURCE=/path/to/celeb node --test tests/*.cjs
+python tests/browser_check.py /path/to/celeb
+```
+
+브라우저 검사는 Playwright와 Chromium이 이미 설치된 개발 환경에서 실행합니다. 검사용 임시 HTTP 서버는 종료할 때 함께 정리됩니다. 배포 도구는 서버를 요구하지 않습니다. Windows 파일 더블클릭 사용은 이 Linux 환경에서 직접 확인하지 못했습니다.
+
+`tools/build_longplay.py`는 처음 배포한 컵 XML의 정확한 SHA-256과 771명 명단을 대상으로 시작 나이·국적 변형을 생성합니다. 알 수 없는 XML이나 변경된 파일은 거부하고 원본을 덮어쓰지 않습니다. 원본의 나이·주 국적 외의 필드는 구조와 바이트 변경 범위를 검사하며 보존합니다. 결과는 FM26 Editor로 가져올 XML이고, FMF 컴파일러가 아닙니다.
+
+```bash
+python tools/build_longplay.py cups.xml output
+python tools/build_release.py '/path/to/ai update.fmf'
+```
+
+두 번째 명령은 기존 `downloads/fm26-review.zip`의 컵 XML, 현재 도구·문서, 사용자가 저장해 보낸 FMF로 새 통합판을 만듭니다. 출력 파일은 결정적인 ZIP 메타데이터를 사용하며 SHA-256과 CRC를 확인합니다. 빌드된 게임 실행 파일이나 제3자 DLL을 포함하지 않습니다.
+
+확인한 외부 참고 자료:
+
+- [FMSuperScout 국가 ID 표](https://github.com/mavarobli/FMSuperScout/blob/main/app/nations.js): 국적 16개 ID를 확인하는 참고. 기존 XML의 Nnat 참조 형식과 함께 사용했으며 실제 에디터 해석은 아직 미검증입니다.
+- [FMSuperScout FMF 형식 조사](https://github.com/mavarobli/FMSuperScout/blob/main/docs/fmf-format.md): 공개 Zstandard 인덱스와 해독 불가능한 본문을 구분. 사용자 FMF에서도 인덱스만 확인했고 본문 변경에는 사용하지 않았습니다.
+- [fm26rte](https://github.com/poi82999/fm26rte), [fmforge](https://github.com/KaliszS/fmforge): 실행 중 편집과 향후 생성 선수 형식을 조사했으나, 이 사용자 버전에서 검증할 수 없어 메모리 쓰기나 성별 미확인 미래 생성 규칙을 도구에 넣지 않았습니다. 해당 프로젝트의 소스·실행 파일을 복사해 배포하지 않습니다.
+
+검증 결과는 도구와 파일의 정합성 범위입니다. FM26 Editor 규칙 시험, 게임 속 얼굴 표시, 국가대표 대회·다음 시즌 컵·장기 노화 동작을 대신하지 않습니다.

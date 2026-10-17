@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>FM26 유소년 얼굴 연결 도우미</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui,-apple-system,'Malgun Gothic',sans-serif; color:#172432; background:#f2f5f8; }
+    * { box-sizing:border-box; } body { margin:0; } main { max-width:1000px; margin:auto; padding:36px 22px 60px; }
+    h1 { font-size:30px; margin:8px 0 12px; letter-spacing:-1px; } h2 { font-size:20px; margin:0 0 14px; }
+    p { line-height:1.7; } .eyebrow { color:#216058; font-weight:750; font-size:13px; letter-spacing:1px; }
+    .intro { color:#465564; max-width:760px; } .badge { display:inline-block; background:#dcefe9; color:#15594e; border-radius:6px; padding:5px 10px; font-size:13px; font-weight:650; }
+    section { background:white; border:1px solid #dce3e9; border-radius:14px; padding:24px; margin-top:20px; }
+    label { display:block; font-size:14px; font-weight:650; margin:12px 0 7px; } input[type=file] { display:block; max-width:100%; }
+    textarea,select,input[type=search] { font:inherit; border:1px solid #b4c1cb; border-radius:7px; padding:10px; background:white; color:#172432; }
+    textarea { width:100%; min-height:130px; resize:vertical; font-family:ui-monospace,monospace; }
+    button { font:inherit; font-weight:650; background:#16695b; border:1px solid #16695b; color:white; border-radius:7px; padding:10px 17px; cursor:pointer; }
+    button:hover { background:#0e5146; } button:disabled { cursor:default; opacity:.45; } button.secondary { background:white; color:#244a56; border-color:#b4c1cb; }
+    button.secondary:hover { background:#eef4f6; } button.small { padding:7px 12px; font-size:13px; }
+    :focus-visible { outline:3px solid #b57600; outline-offset:3px; } .muted { color:#5d6a77; font-size:14px; line-height:1.7; }
+    .note { border-left:3px solid #c18b37; padding-left:13px; color:#634d28; font-size:14px; }
+    .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; } .controls label { margin-top:0; }
+    .status { margin:12px 0 0; font-size:14px; white-space:pre-wrap; line-height:1.6; } .error { color:#ac2c2c; } .ok { color:#166251; }
+    #mappingList { list-style:none; margin:15px 0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:10px; }
+    .mapping { display:flex; align-items:center; gap:14px; border:1px solid #dce3e9; border-radius:9px; padding:12px; min-width:0; }
+    .portrait { width:68px; height:78px; flex-shrink:0; object-fit:contain; background:#edf1f4; border-radius:5px; }
+    .placeholder { display:flex; align-items:center; justify-content:center; color:#697783; font-size:12px; text-align:center; }
+    .mappingInfo { flex:1; min-width:0; } .mappingInfo strong { display:block; font-size:14px; } .filename { overflow-wrap:anywhere; font-size:12px; color:#5d6a77; margin:5px 0 8px; }
+    .download { display:flex; align-items:center; gap:14px; flex-wrap:wrap; } .download p { margin:0; }
+    details { margin-top:20px; } summary { cursor:pointer; font-weight:650; } ol { padding-left:23px; } li { margin:9px 0; line-height:1.7; } code { overflow-wrap:anywhere; }
+    dialog { border:1px solid #bac7d0; border-radius:13px; width:min(900px,94vw); max-height:90vh; padding:20px; }
+    dialog::backdrop { background:#142331a6; } .dialogTop { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+    .dialogTop h2 { margin:0; } #photoSearch { width:100%; margin:12px 0; }
+    #photoGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; margin:14px 0; }
+    .photoOption { padding:7px; min-width:0; color:#172432; border-color:#cdd7de; background:#fff; }
+    .photoOption:hover { background:#eef5f3; } .photoOption img { width:100%; height:110px; object-fit:contain; background:#edf1f4; }
+    .photoOption span { display:block; overflow-wrap:anywhere; font-size:11px; font-weight:400; margin-top:5px; }
+    [hidden] { display:none !important; } @media(max-width:600px) { main { padding:24px 14px 45px; } section { padding:18px; } h1 { font-size:25px; } }
+  </style>
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <div class="eyebrow">FM26 · LOCAL FACE PACK TOOL</div>
+  <h1>유소년에게 연예인 얼굴 연결하기</h1>
+  <p class="intro">기존 얼굴팩의 PNG 사진을 골라, 게임에 이미 등장한 유소년의 ID에 연결합니다. 사진과 ID는 이 브라우저 안에서만 처리하며 인터넷으로 전송하지 않습니다.</p>
+  <span class="badge">설치 없이 · 오프라인 사용 · 원본 보존</span>
+  <p class="note">이 도구는 얼굴 연결 파일만 만듭니다. 선수 생성, 선수 이름 변경, 나이·능력치·은퇴 변경 기능은 없습니다. 기존 생성기의 <code>r-숫자</code> 연결 규칙을 사용하며, FM26에서 실제 얼굴 표시 여부는 적용 후 확인해야 합니다.</p>
+
+  <section>
+    <h2>1. 기존 얼굴 사진 폴더 선택</h2>
+    <label for="photoFolder">연예인 선수 사진이 들어 있는 폴더</label>
+    <input type="file" id="photoFolder" webkitdirectory directory multiple accept="image/png,.png">
+    <label for="includeStaff"><input type="checkbox" id="includeStaff"> 스태프 사진 포함 (선택)</label>
+    <p class="muted">기본으로 <code>스텝</code>·<code>스태프</code>·<code>staff</code>라는 이름의 하위 폴더를 제외합니다. 체크를 바꾸면 기존 미리보기가 지워지므로 다시 만들어 주세요.</p>
+    <p class="muted">하위 폴더의 PNG도 함께 찾습니다. 얼굴팩 전체가 커도 선택한 사진만 새 ZIP에 들어갑니다. 같은 이름의 사진이 여러 폴더에 있어도 별도로 다룹니다. 기존 <code>config.xml</code>이나 EXE 파일은 읽지 않습니다.</p>
+    <p id="photoStatus" class="status" aria-live="polite">선택한 폴더가 없습니다.</p>
+  </section>
+
+  <section>
+    <h2>2. 게임에서 확인한 유소년 ID 입력</h2>
+    <label for="ids">한 줄에 한 명씩 입력하세요. 숫자 또는 r-숫자 형식을 사용할 수 있습니다.</label>
+    <textarea id="ids" spellcheck="false" placeholder="게임에서 실제로 확인한 ID를 붙여 넣으세요."></textarea>
+    <p class="muted">쉼표·공백으로 구분해도 됩니다. 빈 입력과 중복 ID는 허용하지 않습니다. 한 번에 최대 500명까지 연결합니다. 프로필의 ID 표시 기능이 있는지 게임 설정에서 확인하고, 반드시 해당 유소년의 실제 ID를 사용하세요.</p>
+    <div class="controls">
+      <div>
+        <label for="sortOrder">사진 자동 배정 순서</label>
+        <select id="sortOrder"><option value="path">폴더 경로·파일명 순</option><option value="name">파일명 순</option><option value="reverse">폴더 경로·파일명 역순</option></select>
+      </div>
+      <button id="makePreview" type="button">연결 미리보기 만들기</button>
+    </div>
+    <p id="inputStatus" class="status" role="alert"></p>
+  </section>
+
+  <section id="previewSection" hidden>
+    <h2>3. 선수별 사진 확인</h2>
+    <p id="mappingStatus" class="status" aria-live="polite"></p>
+    <p class="muted">‘사진 선택’으로 각 선수의 사진을 바꿀 수 있습니다. 같은 사진을 여러 선수에게 연결할 수도 있습니다. 새 미리보기를 만들면 사진 연결을 처음부터 다시 배정합니다.</p>
+    <button id="repeatAssign" class="secondary small" type="button" hidden>사진을 반복해서 빈칸 채우기</button>
+    <ul id="mappingList"></ul>
+    <div class="download"><button id="downloadZip" type="button" disabled>새 얼굴팩 ZIP 다운로드</button><p id="zipSummary" class="muted"></p></div>
+    <p id="downloadStatus" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section>
+    <h2>4. 게임에 적용</h2>
+    <ol>
+      <li>다운로드한 ZIP을 풀어 <code>config.xml</code>과 <code>faces</code> 폴더가 함께 있는지 확인합니다.</li>
+      <li>현재 기존 얼굴팩이 정상 표시되는 FM26의 <code>graphics</code> 폴더 아래에 <strong>새 빈 폴더</strong>를 만들어 두 항목을 함께 넣습니다. 예를 들어 시즌마다 별도 폴더 이름을 사용하세요. 기존 얼굴팩이나 팀 로고 폴더에 덮어쓰지 않습니다.</li>
+      <li>게임 설정에서 그래픽 캐시 비우기·스킨 새로고침 기능을 사용할 수 있는지 확인하고, 다시 불러온 뒤 해당 유소년의 얼굴을 확인합니다. 메뉴 명칭과 적용 방식은 FM26 버전에 따라 확인이 필요합니다.</li>
+    </ol>
+    <details><summary>사진이 표시되지 않을 때</summary><p class="muted">게임에서 확인한 유소년 ID가 맞는지, ZIP을 푼 뒤 config.xml 옆에 faces 폴더가 있는지, 다른 얼굴팩이 동일한 유소년 ID를 연결하고 있지는 않은지 확인하세요. 이 도구는 기존 생성기에서 확인한 r- 경로를 출력하지만, 실제 FM26 게임 적용은 별도 확인이 필요합니다. 선수 이름은 이 파일로 바뀌지 않습니다.</p></details>
+    <p class="muted">사진 한 장 최대 20MiB, 한 번의 ZIP에 사용하는 사진 합계 최대 128MiB입니다. 큰 얼굴팩은 선택할 수 있으며, 출력에 사용하는 사진의 합계만 제한합니다. PNG 파일은 편집하거나 다시 압축하지 않고 그대로 복사합니다.</p>
+  </section>
+</main>
+<dialog id="photoDialog" aria-labelledby="dialogTitle">
+  <div class="dialogTop"><h2 id="dialogTitle">사진 선택</h2><button id="closeDialog" class="secondary small" type="button">닫기</button></div>
+  <label for="photoSearch">파일명 또는 폴더명 검색</label><input id="photoSearch" type="search" autocomplete="off">
+  <p id="searchStatus" class="muted" aria-live="polite"></p><div id="photoGrid"></div>
+  <button id="morePhotos" class="secondary" type="button" hidden>다음 사진 보기</button>
+</dialog>
+</body>
+</html>

@@ -1,0 +1,710 @@
+[
+  {
+    "name": "강경원",
+    "path": "플레디스/2002042912.png",
+    "evidence": "printed_caption",
+    "sha256": "2f67cc8e3c615c4a2c763f0f6acc93ee932e4df50622023527c881f7d2118152"
+  },
+  {
+    "name": "강예빈",
+    "path": "플레디스/2002042911.png",
+    "evidence": "printed_caption",
+    "sha256": "3db492a44d8bde6bf867b6fae7305cf12eba1e842eaa8e48e3af2219b242c07b"
+  },
+  {
+    "name": "강지영",
+    "path": "DSP미디어/2002042827.png",
+    "evidence": "printed_caption",
+    "sha256": "8dbf2aabe031baaec58854075b7b8601fff4ba15541f329c996972dece1c0d96"
+  },
+  {
+    "name": "고민시",
+    "path": "미스틱/2002042978.png",
+    "evidence": "printed_caption",
+    "sha256": "d7715d3825e4273d07fc4e1266cfe34358312f4926cd904eba4b66c125a720b3"
+  },
+  {
+    "name": "고윤정",
+    "path": "2부리그/위지윅,TS,위에화아센디오/2002043170.png",
+    "evidence": "printed_caption",
+    "sha256": "b65460a4cbfafcf8a077327c855dd95bff860b1e5f4e649fb7072f4b1602f00f"
+  },
+  {
+    "name": "고윤하",
+    "path": "2부리그/C9,젤리피쉬,드림캐쳐/2002043120.png",
+    "evidence": "printed_caption",
+    "sha256": "a3fbb871192d9cb67ac55dac1b7dd7c183575ea55a575000a0961d9c4fc4a8a0"
+  },
+  {
+    "name": "고준희",
+    "path": "큐브/2002043610.png",
+    "evidence": "printed_caption",
+    "sha256": "076aa9d5c240463957c76085120a43cd51417a54d9dc9f93ffe97938e2e71f62"
+  },
+  {
+    "name": "권나라",
+    "path": "2부리그/판타지오/2002043007.png",
+    "evidence": "printed_caption",
+    "sha256": "ce21ba8ed0c54c2bd004b632a8d05ee2069d8efc9769efe7a4d19fe7322806f1"
+  },
+  {
+    "name": "권보아",
+    "path": "SM/2002042556.png",
+    "evidence": "printed_caption",
+    "sha256": "e49c1340cd3f9953635d74b2f2d9b4c5481e51cb381c0a1e4fa0838baac77ec5"
+  },
+  {
+    "name": "김민경",
+    "path": "플레디스/2002042908.png",
+    "evidence": "printed_caption",
+    "sha256": "878d4415cd34487955a4a09e2f4b32a28541992a44f45354107e502cc2d87a4f"
+  },
+  {
+    "name": "김민지",
+    "path": "하이브/2002042576.png",
+    "evidence": "printed_caption",
+    "sha256": "5ff9201b50bf6d005b3b50794f35b1d45009cb4aa208c53d72037f798d783bde"
+  },
+  {
+    "name": "김설현",
+    "path": "FNC/2002042803.png",
+    "evidence": "printed_caption",
+    "sha256": "1bfee540b014908cbbeca3a5432ce7e54b71cb7733d108465a00034abeb4f37f"
+  },
+  {
+    "name": "김세연",
+    "path": "FNC/2002042826.png",
+    "evidence": "printed_caption",
+    "sha256": "7aa16fb965e7a32f30dda49857ce8725a9b849f88ff50a37f8d1a3ee0e6f07df"
+  },
+  {
+    "name": "김예원",
+    "path": "2부리그/스타제국/2002043028.png",
+    "evidence": "printed_caption",
+    "sha256": "fa6df7fda4f48523acc1e20bc0a0c91c68e151e1915bc2b8f47e6f88c1a83032"
+  },
+  {
+    "name": "김유연",
+    "path": "모드하우스/2002042753.png",
+    "evidence": "printed_caption",
+    "sha256": "030b56fe5285875115102de1256c478d6ccafc5cea177007a64e2fce2fe069ce"
+  },
+  {
+    "name": "김채원",
+    "path": "DSP미디어/2002042840.png",
+    "evidence": "printed_caption",
+    "sha256": "c5b57d197fdf3cecea5a6f0e002cf3386adc76aa08bdd13480989460cb3199a3"
+  },
+  {
+    "name": "김하람",
+    "path": "미스틱/2002043002.png",
+    "evidence": "printed_caption",
+    "sha256": "c3bba89622c583a62d76edfbbd82f70fcde87fa72bd1b33bde0c74a0e406a363"
+  },
+  {
+    "name": "김향기",
+    "path": "자계/2002044879.png",
+    "evidence": "printed_caption",
+    "sha256": "fdb3945d9ec1a9a1034817cf45e5177355564db0700df11908cb06ef3364d24c"
+  },
+  {
+    "name": "김현아",
+    "path": "큐브/2002042727.png",
+    "evidence": "printed_caption",
+    "sha256": "17057580f11cc0dc1be7d4b419215477d0a8d8e0976da968c2b230cdec4e9d1c"
+  },
+  {
+    "name": "나나",
+    "path": "2부리그/H뮤직,NCH,인코드,인터파크,크롬/2002043333.png",
+    "evidence": "printed_caption",
+    "sha256": "7b484c9bac7badf560f10146d4509f94d6b1b8d56c583e870054c22dde57f4d3"
+  },
+  {
+    "name": "나나",
+    "path": "플레디스/2002042888.png",
+    "evidence": "printed_caption",
+    "sha256": "dae012bce654e15e503e6ce1bfa07fbb9400f3beb5c65baa1b97e4921013dbd1"
+  },
+  {
+    "name": "남규희",
+    "path": "YG/2002042490.png",
+    "evidence": "printed_caption",
+    "sha256": "9b4a4ccfb4387f61c6e93b9d6ac7a1a67c22ca8803ec9b106321dcc70e4830a4"
+  },
+  {
+    "name": "남유정",
+    "path": "2부리그/브레이브,GLG,사람엔터/2002043087.png",
+    "evidence": "printed_caption",
+    "sha256": "e5fa81b664c4eb5a6f509c3afda633c4418c0e053de368bb9271eebd5e7a1f3b"
+  },
+  {
+    "name": "노이영",
+    "path": "플레디스/2002042907.png",
+    "evidence": "printed_caption",
+    "sha256": "bb1c72e230a98b91590724076a78d7f09b844ae393c34646443d5d2891e36f4b"
+  },
+  {
+    "name": "노지선",
+    "path": "플레디스/2002042898.png",
+    "evidence": "printed_caption",
+    "sha256": "3c36cdb41f3bc4fb61f38bbbcea99f2ffd3754445e8eea6baba3b13a7c76e99c"
+  },
+  {
+    "name": "니나 힐먼",
+    "path": "JYP/2002042542.png",
+    "evidence": "printed_caption",
+    "sha256": "de99a4a9c1c09785ebc4d0d541129d538d68cd466f4fcb763d21510424ecd369"
+  },
+  {
+    "name": "도시",
+    "path": "RBW/2002042790.png",
+    "evidence": "printed_caption",
+    "sha256": "735524cf88b27e152d1f8a0d3c1508376b2af8ba3f2f04ac1c10e08ed9df5963"
+  },
+  {
+    "name": "레베카",
+    "path": "플레디스/2002042902.png",
+    "evidence": "printed_caption",
+    "sha256": "6229862cb542480b60d5c1887d42488e18f754a4d2a5837392db40e162564deb"
+  },
+  {
+    "name": "레이나",
+    "path": "플레디스/2002042901.png",
+    "evidence": "printed_caption",
+    "sha256": "0cdbcccd97cbb29f72aded864daa442c46c86dc271f232023bb9299aef5003fe"
+  },
+  {
+    "name": "로아",
+    "path": "RBW/2002042802.png",
+    "evidence": "printed_caption",
+    "sha256": "0f50f57bbdd77fa1ca066f7fb760b90e1a2f44a63c98fc774c1c13b1ec886ff8"
+  },
+  {
+    "name": "리지",
+    "path": "플레디스/2002042895.png",
+    "evidence": "printed_caption",
+    "sha256": "428cd3ecf618c758b6038ae71e611bf7df8bdb969ccc233e436df0994149698a"
+  },
+  {
+    "name": "메이",
+    "path": "2부리그/QWER,어트랙트,YNB,스타팅하우스,더뮤즈,MMM,NSENM/2002043399.png",
+    "evidence": "printed_caption",
+    "sha256": "2e4cdff09ea45ef68045e13990357f83fc9abafdcd7cbce04538fa924543c644"
+  },
+  {
+    "name": "박민주",
+    "path": "하이브/2002042602.png",
+    "evidence": "printed_caption",
+    "sha256": "7458d54e8e312be105f3f274cb701245e579f03e5e949b19de690aeace2c49dc"
+  },
+  {
+    "name": "박보영",
+    "path": "BH,어썸이엔티,아티스트컴퍼니/2002042916.png",
+    "evidence": "printed_caption",
+    "sha256": "2270e3301d850346f3a05ca2a021ea2b023bf0503c43b8cef7dd59ff70a5acba"
+  },
+  {
+    "name": "박보은",
+    "path": "MBK/2002042663.png",
+    "evidence": "printed_caption",
+    "sha256": "fca5026d34800de0d791220bf20a51991394e7319b8b516990585a262e77e891"
+  },
+  {
+    "name": "박수빈",
+    "path": "CJ/2002042684.png",
+    "evidence": "printed_caption",
+    "sha256": "05bea588b6c66d79b97b3d628740ef76f913fef83ac6d40ff4c4c069ef0b40aa"
+  },
+  {
+    "name": "박시연",
+    "path": "플레디스/2002042909.png",
+    "evidence": "printed_caption",
+    "sha256": "2df40e161cf31863f2eaa0b929d81e243390aab6ad9327130282cb4d6e27c761"
+  },
+  {
+    "name": "박시온",
+    "path": "모드하우스/2002042765.png",
+    "evidence": "printed_caption",
+    "sha256": "58b1470125d0c06891a2a85e92f2f742e30690e194cbd9f7322125dca8bd4552"
+  },
+  {
+    "name": "박지안",
+    "path": "IHQ,나무,숲/2002042871.png",
+    "evidence": "printed_caption",
+    "sha256": "67324edf0fcbdb49c77b3523244dd0434ea13cdfcc98617c4822f679ca6591b9"
+  },
+  {
+    "name": "박지연",
+    "path": "MBK/2002042635.png",
+    "evidence": "printed_caption",
+    "sha256": "bc186d58da3a7ed32ea49d87d791ed810b7e5147ab772e5c2f346c9877301384"
+  },
+  {
+    "name": "박지원",
+    "path": "플레디스/2002042894.png",
+    "evidence": "printed_caption",
+    "sha256": "fc76103ddcc6ee4354c1652be1e4c6428181e92288101357bd2dbd18b4ac5d01"
+  },
+  {
+    "name": "박해윤",
+    "path": "FNC/2002042815.png",
+    "evidence": "printed_caption",
+    "sha256": "32e742e7ddafb9b39b64674d4dffee2b1f899605c7bd1eb8c7567b2bddd156fe"
+  },
+  {
+    "name": "배성연",
+    "path": "플레디스/2002042913.png",
+    "evidence": "printed_caption",
+    "sha256": "febc1a291b9bb22f62756c1f4a3675412be758af0adb8c7fff6e81f8ef8c82f1"
+  },
+  {
+    "name": "백지헌",
+    "path": "플레디스/2002042890.png",
+    "evidence": "printed_caption",
+    "sha256": "aee2958f86a798340f01d37546708a4173853d61f45f4c2bd1280543209f166b"
+  },
+  {
+    "name": "비비",
+    "path": "2부리그/무소속,블리츠웨이,바로엔터,제이와이드/2002043332.png",
+    "evidence": "printed_caption",
+    "sha256": "d6c91522e0950863ee7564308103e9e38dc8ec578a17b5fd2212806bc388a805"
+  },
+  {
+    "name": "사쿠라",
+    "path": "하이브/2002042589.png",
+    "evidence": "printed_caption",
+    "sha256": "a2e0292d9f05a4c0f6a3f39445d17126ef7b6550835990fa46b3d92bf0d0890d"
+  },
+  {
+    "name": "샨티",
+    "path": "MLD 드림티/2002042960.png",
+    "evidence": "printed_caption",
+    "sha256": "ea27e44f23abc0a888f3488020017132c7a731242666a293b493b31a5097049f"
+  },
+  {
+    "name": "서윤경",
+    "path": "울림/2002042977.png",
+    "evidence": "printed_caption",
+    "sha256": "26aa16940b30fa9fee209b0eb100684428b637ad21c5cb4d0538905534f9f984"
+  },
+  {
+    "name": "서이",
+    "path": "2부리그/브레이브,GLG,사람엔터/2002043103.png",
+    "evidence": "printed_caption",
+    "sha256": "ca0d9de01e0391ae65d5e4d7af6de680316a95b06d99a74558429fabeff845be"
+  },
+  {
+    "name": "소소",
+    "path": "2부리그/위지윅,TS,위에화아센디오/2002043216.png",
+    "evidence": "printed_caption",
+    "sha256": "2880ce33c512ab76e2c7e04e03224f85fc853dee61b1e081f07984cdf680a8ee"
+  },
+  {
+    "name": "소유",
+    "path": "스타쉽/2002042674.png",
+    "evidence": "printed_caption",
+    "sha256": "d629d23c30d8c58c55213eba627fbc282e232267791bd79a18722758d3528c80"
+  },
+  {
+    "name": "송하영",
+    "path": "플레디스/2002042889.png",
+    "evidence": "printed_caption",
+    "sha256": "69a4f629a185df067178877d99dc66a41b55a48ff2420f1bd9c9e4b983e607cb"
+  },
+  {
+    "name": "신린아",
+    "path": "2부리그/초록뱀,키이스트/2002043282.png",
+    "evidence": "printed_caption",
+    "sha256": "e0c6a713b0c57c7effd8d6b26b2b191a1de9a94afe7e631655b013869731f57f"
+  },
+  {
+    "name": "신은수",
+    "path": "IHQ,나무,숲/2002042887.png",
+    "evidence": "printed_caption",
+    "sha256": "9e219f505ae7a56a95b4fc03c2e2c53a32a3989d0cd2bc964d16c7dc14484aad"
+  },
+  {
+    "name": "아린",
+    "path": "RBW/2002042777.png",
+    "evidence": "printed_caption",
+    "sha256": "f4c93382328da317f1c7680f126b6c13356d7934c7b7b7191c0314147c585351"
+  },
+  {
+    "name": "아이유",
+    "path": "카카오/2002042603.png",
+    "evidence": "printed_caption",
+    "sha256": "af17f6ff08a4c16485be16f44919a1c6771f90d74eb17e1f6be7c76909c9519a"
+  },
+  {
+    "name": "안서현",
+    "path": "2부리그/고스트/2002043068.png",
+    "evidence": "printed_caption",
+    "sha256": "e9548591324fba0454d1794652f1a00c72a7d39eda4cca98f06ea9d9018a98ba"
+  },
+  {
+    "name": "안솔빈",
+    "path": "2부리그/H뮤직,NCH,인코드,인터파크,크롬/2002043355.png",
+    "evidence": "printed_caption",
+    "sha256": "716d8c50a23c27cfe6b327105f851421686fddaed3538cf937fd6d98fe62c103"
+  },
+  {
+    "name": "야부키 나코",
+    "path": "CJ/2002042705.png",
+    "evidence": "printed_caption",
+    "sha256": "817072784fcbcaa11b257816f550742f8a472757f0ae17b3dc1f95a91991f85b"
+  },
+  {
+    "name": "여은",
+    "path": "카카오/2002042634.png",
+    "evidence": "printed_caption",
+    "sha256": "d5414bd8f5a8b6a6301548c3932b478b34f2a69b5c02351fefa00ac9a6b2dab3"
+  },
+  {
+    "name": "예하나",
+    "path": "플레디스/2002042914.png",
+    "evidence": "printed_caption",
+    "sha256": "87465a553a4164cda863a69c7bb3321801a3decf16d74db606c2685cdb021348"
+  },
+  {
+    "name": "오영주",
+    "path": "미스틱/2002042990.png",
+    "evidence": "printed_caption",
+    "sha256": "c0d004000d8df6157034441c847d3f383f4c0bfa4a3ae150b36088fa9a8d6f39"
+  },
+  {
+    "name": "오지율",
+    "path": "2부리그/H뮤직,NCH,인코드,인터파크,크롬/2002043377.png",
+    "evidence": "printed_caption",
+    "sha256": "a3a102082cfb4a5550c5ef7324b8cf88582e3332dde5985036f7cfe239baa3ae"
+  },
+  {
+    "name": "우혜림",
+    "path": "JYP/2002042524.png",
+    "evidence": "printed_caption",
+    "sha256": "baf2036c55d0df7bc14762ea2ca0bfb4e8539fe16b35165c7ec40baded6588e3"
+  },
+  {
+    "name": "원진아",
+    "path": "BH,어썸이엔티,아티스트컴퍼니/2002042928.png",
+    "evidence": "printed_caption",
+    "sha256": "a624511d30b446b865d64eab65a26f26a775a4b0e0a21351c4462560402ab82c"
+  },
+  {
+    "name": "원하늘",
+    "path": "2부리그/바나나컬쳐,폴라리스,S2,바인/2002043239.png",
+    "evidence": "printed_caption",
+    "sha256": "49b3ef7e3a4ca393abf0a4003288a81c738c2fabea3f41f8a87e075af9ddc00c"
+  },
+  {
+    "name": "유나",
+    "path": "2부리그/브레이브,GLG,사람엔터/2002043119.png",
+    "evidence": "printed_caption",
+    "sha256": "0ccfe267541028ca78e9c869b52d772ac46ac7410c12a80466e320cb7f135d72"
+  },
+  {
+    "name": "유소영",
+    "path": "플레디스/2002042904.png",
+    "evidence": "printed_caption",
+    "sha256": "8b4abfcbcdf5230ef933fa715c2a25896e8f79f2868747cfd97fee2962bfb62b"
+  },
+  {
+    "name": "유아라",
+    "path": "2부리그/판타지오/2002043027.png",
+    "evidence": "printed_caption",
+    "sha256": "021f3a6cc940e6f2b532d77778056f5cd4c90401d26c2694365523bbb021d915"
+  },
+  {
+    "name": "유이",
+    "path": "플레디스/2002042891.png",
+    "evidence": "printed_caption",
+    "sha256": "f598aff71900aae6be12c5eedcc19585cc6c1acebe57227b161b691299fb14f4"
+  },
+  {
+    "name": "이가은",
+    "path": "플레디스/2002042906.png",
+    "evidence": "printed_caption",
+    "sha256": "771340fd29f3ed891d799c104ae54b6dc58af34a218f3901f0f163bba19aa6b0"
+  },
+  {
+    "name": "이금조",
+    "path": "2부리그/스타제국/2002043038.png",
+    "evidence": "printed_caption",
+    "sha256": "36c7e2d1fb86be0d033e01bf5db5cf831fa6505b9518a7735d54ea409e5c1a6e"
+  },
+  {
+    "name": "이나경",
+    "path": "플레디스/2002042892.png",
+    "evidence": "printed_caption",
+    "sha256": "40299307c2a000d53e690fc3501c6ae87842e4133f3f57d18f33f55fd626028c"
+  },
+  {
+    "name": "이미주",
+    "path": "울림/2002042961.png",
+    "evidence": "printed_caption",
+    "sha256": "0e412d4425d165593abe4a6545838bc50e97bcfc07069475b4849715ce32ca03"
+  },
+  {
+    "name": "이새롬",
+    "path": "플레디스/2002042903.png",
+    "evidence": "printed_caption",
+    "sha256": "dc15b2ff83f08d8741ac5332522ebcf9ff4003e024da0397aad7c4330da8a4e9"
+  },
+  {
+    "name": "이서연",
+    "path": "플레디스/2002042900.png",
+    "evidence": "printed_caption",
+    "sha256": "7aa9515fd0b667c14bb4c5b866a3fa69484b0245cc22538ed5a91004263e681f"
+  },
+  {
+    "name": "이서영",
+    "path": "2부리그/판타지오/2002043017.png",
+    "evidence": "printed_caption",
+    "sha256": "7115ba8be14555ca7d35c6edc1c5fc50871bca3566fbe9309ba32dcbb6889785"
+  },
+  {
+    "name": "이선미",
+    "path": "JYP/2002042505.png",
+    "evidence": "printed_caption",
+    "sha256": "b5a6c0e777858804b7f8267252c377a7cad6f8b5f65f3ff8b13d27ebd217bb36"
+  },
+  {
+    "name": "이수정",
+    "path": "울림/2002042969.png",
+    "evidence": "printed_caption",
+    "sha256": "93308991c06db04701c41511f346d9d670b29e727650890420b48eca55f59ab2"
+  },
+  {
+    "name": "이아름",
+    "path": "MBK/2002042649.png",
+    "evidence": "printed_caption",
+    "sha256": "c7f615acb044842c0f5a8dbd6a48edb1c81710058500d231888384e74029adb9"
+  },
+  {
+    "name": "이아인",
+    "path": "MLD 드림티/2002042951.png",
+    "evidence": "printed_caption",
+    "sha256": "459ba3a70da98523864427d77553b2ecd6da02427e4a19a75c43c1439229c126"
+  },
+  {
+    "name": "이영서",
+    "path": "YG/2002042575.png",
+    "evidence": "printed_caption",
+    "sha256": "ffc8feaa5288219146e03a8bcec944da3be32c085a1838e3f9cc2f2a5049bc6a"
+  },
+  {
+    "name": "이유미",
+    "path": "2부리그/무소속,블리츠웨이,바로엔터,제이와이드/2002043308.png",
+    "evidence": "printed_caption",
+    "sha256": "2c104acda66b69838a35a461f0aa2c68023dc94cfa8c93188c7c022b6300503d"
+  },
+  {
+    "name": "이이담",
+    "path": "2부리그/고스트/2002043059.png",
+    "evidence": "printed_caption",
+    "sha256": "fae0b30ee7bdf5aa482adb5aca3f2629c11cdf1fcddeae60115d0235493e26c4"
+  },
+  {
+    "name": "이주연",
+    "path": "플레디스/2002042905.png",
+    "evidence": "printed_caption",
+    "sha256": "1f7496a7e4eeb90e0956fb9f021854af17f6e274ab64bd789c2be86408b73649"
+  },
+  {
+    "name": "이채영",
+    "path": "플레디스/2002042893.png",
+    "evidence": "printed_caption",
+    "sha256": "688fc9ab1276e6dc75021997eb677f012c11654cd1279cc52f350c6a54eebcae"
+  },
+  {
+    "name": "이혜리",
+    "path": "MLD 드림티/2002042941.png",
+    "evidence": "printed_caption",
+    "sha256": "22ac48aec20d39a0fc9864a373406d83e71f647d8d995383ea79cd7cf540fbcf"
+  },
+  {
+    "name": "임나영",
+    "path": "플레디스/2002042897.png",
+    "evidence": "printed_caption",
+    "sha256": "7752fa7b15e8fbd6aef8059442d78a66c8b96dfa92db3bf1904b9984aa61a4fc"
+  },
+  {
+    "name": "장규리",
+    "path": "플레디스/2002042896.png",
+    "evidence": "printed_caption",
+    "sha256": "9fc05a32237c045bbcb146d638ceddb80280b32f39eab634afbcc4769d6613aa"
+  },
+  {
+    "name": "장예은",
+    "path": "큐브/2002042740.png",
+    "evidence": "printed_caption",
+    "sha256": "eee70008ed4e054e01a1f1d91e64e13aec771affef710bc5cd520b039a109262"
+  },
+  {
+    "name": "장원영",
+    "path": "스타쉽/2002042664.png",
+    "evidence": "printed_caption",
+    "sha256": "78381e5326236d2fac2c782bbc01c8ccaf47e6cc58bd5194d5c91ceef93fce08"
+  },
+  {
+    "name": "전소민",
+    "path": "스타쉽/2002043169.png",
+    "evidence": "printed_caption",
+    "sha256": "226416572f4e434cf0d01d32448a3a5916e3aff2c5ad9384c681e721ad31343f"
+  },
+  {
+    "name": "전소영",
+    "path": "BH,어썸이엔티,아티스트컴퍼니/2002042940.png",
+    "evidence": "printed_caption",
+    "sha256": "4ab01c22ec81a0506bb750c30680ece6d8d6052544b99ba80a6aaba2f8d877a1"
+  },
+  {
+    "name": "전종서",
+    "path": "자계/2002044873.png",
+    "evidence": "printed_caption",
+    "sha256": "f55095785245bced5f1b2de25256b2093924725530affe97076c999fedefed97"
+  },
+  {
+    "name": "전지현",
+    "path": "IHQ,나무,숲/2002042854.png",
+    "evidence": "printed_caption",
+    "sha256": "def64ce8975ed75d8c4d9ca2d3f49ce2b18d3d3bf20d09cecd5eada2ef4a79b5"
+  },
+  {
+    "name": "정미미",
+    "path": "2부리그/C9,젤리피쉬,드림캐쳐/2002043144.png",
+    "evidence": "printed_caption",
+    "sha256": "5e487e8f507cd1f1b5366728995f80a3652c270895b81be893c390f5cb10782b"
+  },
+  {
+    "name": "정선혜",
+    "path": "DSP미디어/2002042853.png",
+    "evidence": "printed_caption",
+    "sha256": "2f032d674631f9bfedf9d7a926257d9967f23461230135fb41449d4007260706"
+  },
+  {
+    "name": "정은우",
+    "path": "플레디스/2002042910.png",
+    "evidence": "printed_caption",
+    "sha256": "34a0dcba47d04ee67ac34d5d80cd789a2f69e8ce25d5d2a511a025e5de315091"
+  },
+  {
+    "name": "정이안",
+    "path": "SM/2002042572.png",
+    "evidence": "printed_caption",
+    "sha256": "29df177acd5d717d86105c5ac62e50d0f91fb272614be2270e8c3a15ade16cb8"
+  },
+  {
+    "name": "정지소",
+    "path": "2부리그/초록뱀,키이스트/2002043262.png",
+    "evidence": "printed_caption",
+    "sha256": "5861d054ba61b7e07779cdf6943640b678a7efd437358913a4f7ad9c675dcae4"
+  },
+  {
+    "name": "제니",
+    "path": "YG/2002042472.png",
+    "evidence": "printed_caption",
+    "sha256": "40698ecb45962ebf62a5dc4765ba0266b84240655d093385eabfa802401c8e05"
+  },
+  {
+    "name": "제시카",
+    "path": "2부리그/무소속,블리츠웨이,바로엔터,제이와이드/2002043283.png",
+    "evidence": "printed_caption",
+    "sha256": "2a8e9031d1af3f1729059de70beeea5ba5d3b20e05cd83e2eb275e97af826aef"
+  },
+  {
+    "name": "조주은",
+    "path": "2부리그/스타제국/2002043048.png",
+    "evidence": "printed_caption",
+    "sha256": "1c2e0d24c725415bdd375922f0093c23232d42a8ab9ce30d1031cb1fa8e6a2be"
+  },
+  {
+    "name": "주결경",
+    "path": "플레디스/2002042899.png",
+    "evidence": "printed_caption",
+    "sha256": "625fb96c06633103bb02b8748a41f18ef9086d76a5aa05323568268d30858e60"
+  },
+  {
+    "name": "지한",
+    "path": "카카오/2002042619.png",
+    "evidence": "printed_caption",
+    "sha256": "3245d4faeeb124a952d48eecf40917889e1ba4e7ab5a5b04f1dcfd6598339fa1"
+  },
+  {
+    "name": "차주영",
+    "path": "2부리그/고스트/2002043049.png",
+    "evidence": "printed_caption",
+    "sha256": "a85730cc1eb59012d07e8840103dad226ba33afdd5129ce471cea7db63f62d2d"
+  },
+  {
+    "name": "최예나",
+    "path": "2부리그/위지윅,TS,위에화아센디오/2002043193.png",
+    "evidence": "printed_caption",
+    "sha256": "9dc87931e88a78486a2986c3f6b83f917ebe9750864e122a85e65ae2996b92c1"
+  },
+  {
+    "name": "최유리",
+    "path": "2부리그/QWER,어트랙트,YNB,스타팅하우스,더뮤즈,MMM,NSENM/2002043420.png",
+    "evidence": "printed_caption",
+    "sha256": "30ec3ee4756681176fb60ab6b415329c809ac7bc11796700d964057a058ebde1"
+  },
+  {
+    "name": "츄",
+    "path": "2부리그/메이저나인/2002043069.png",
+    "evidence": "printed_caption",
+    "sha256": "eeba4cc9f8e2894f3bcbab071db8d1430026ca9e7460d206b3cb75077cd5c1c1"
+  },
+  {
+    "name": "카리나",
+    "path": "SM/1.png",
+    "evidence": "printed_caption",
+    "sha256": "fc99a336eb22f9ceee17fe19b5f407d18661b21c39acfe1205f055e2ffc06312"
+  },
+  {
+    "name": "카일라",
+    "path": "플레디스/2002042915.png",
+    "evidence": "printed_caption",
+    "sha256": "696236137cba7972ba5c65eada51109c1dde7afff7af18b69bbd04245b9c3006"
+  },
+  {
+    "name": "캐스퍼",
+    "path": "2부리그/메이저나인/2002043078.png",
+    "evidence": "printed_caption",
+    "sha256": "1d3a09d1f12f57c6e792392f0a0b0af2282e7acdc2c672e83210e1f1b6d114e3"
+  },
+  {
+    "name": "코토네",
+    "path": "모드하우스/2002042776.png",
+    "evidence": "printed_caption",
+    "sha256": "c8357695016234edced652ad7d89536b268dd3e04eaabea798a6a1005e61cc9f"
+  },
+  {
+    "name": "토미오카 마이",
+    "path": "CJ/2002042726.png",
+    "evidence": "printed_caption",
+    "sha256": "3828c6ffce2c3869e7c62557abf6f11730162219de450fc583ae9df3a2cf19ce"
+  },
+  {
+    "name": "하니",
+    "path": "2부리그/바나나컬쳐,폴라리스,S2,바인/2002043217.png",
+    "evidence": "printed_caption",
+    "sha256": "e12366f52f9672b4e92962be5174eba37210a825e1f76ac76c11d432250d86b5"
+  },
+  {
+    "name": "한소영",
+    "path": "2부리그/초록뱀,키이스트/2002043272.png",
+    "evidence": "printed_caption",
+    "sha256": "267b2d9af1b81685fb9443184c9c7bb4a273b683e2fa2008e1329e61db88bcff"
+  },
+  {
+    "name": "한소희",
+    "path": "자계/2002043651.png",
+    "evidence": "printed_caption",
+    "sha256": "08b3e1a150d7186d187e0aa9b453d1a9e99ae04f1ee0d4874bb1ca32ce60d4e8"
+  },
+  {
+    "name": "황수연",
+    "path": "2부리그/C9,젤리피쉬,드림캐쳐/2002043168.png",
+    "evidence": "printed_caption",
+    "sha256": "1d3311891ee65ff35d344d7c847ee906bec4b79dbea8562ce24c5956bb334b66"
+  }
+]
