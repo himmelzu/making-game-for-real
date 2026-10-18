@@ -1,14 +1,8 @@
 # FM26 여자슈퍼연예인리그 · 장기 커리어 도우미
 
-[Windows 자동화 실험판 v3 다운로드](https://github.com/himmelzu/making-game-for-real/raw/refs/heads/main/downloads/fm26-auto-beta-v3.zip)
+**2026-10-18: Windows 보안이 자동화 v3 ZIP을 `Trojan:Script/Sabsik.Fl.A!ml`로 탐지했다는 보고를 받아 배포를 중단했습니다.** 현재 브랜치의 ZIP 다운로드를 회수했으며, 악성 여부나 오탐 여부를 확정하지 못했습니다. 파일을 실행하거나 격리에서 복원하지 마세요. [탐지 사실과 확인 범위](docs/security-review.md)
 
-v3에는 실행 중인 FM26을 읽어 CSV 없이 선수 후보를 찾고, 기존 DB의 연예인 이름 4항목과 얼굴팩을 일괄 적용하는 코드가 들어 있습니다. 기존 보호 선수의 능력치 고정·28세 이상→22세 조정도 포함합니다. ZIP을 모두 풀고 `Start.cmd`로 실행합니다. Python은 동봉합니다.
-
-**실제 FM26에서 이름 변경 후 저장·재로드를 검증하지 못한 실험판입니다.** 이름 참조의 수명·저장 영속화는 미검증이며 완전 무인 실행·전체 은퇴 방지는 제공하지 않습니다. 알려진 버전과 구조를 확인하지 못하면 쓰기를 막습니다. 별도 세이브에서 먼저 확인해야 합니다. [v3 사용법과 한계](docs/automation.md) · [구조 출처](docs/automation-research.md)
-
-유소년 입단 때 **스캔 → 후보 확인 → 일괄 적용**하는 방식입니다. 진행 중인 세이브의 기존 14~18세 여성 선수도 선택적으로 후보에 넣을 수 있습니다. 뒤늦게 로드된 실존 선수도 후보가 될 수 있어 대상 확인은 필요합니다. 새 세이브·과거 세이브 분기는 새 커리어 이름으로 등록합니다.
-
-아래는 기존 v2 자료에 대한 설명입니다. v2의 FMF·XML은 자동화 앱과 별도로 보존했습니다.
+v3 소스는 원인 조사를 위해 보존합니다. 아래 v2는 FM26 Editor용 데이터와 브라우저 도우미이며, 회수한 Windows 실행 패키지와 별개입니다. 소스·공식 Python과 배포물의 해시가 일치한다는 검사만으로 백신 경고를 무시할 수는 없습니다.
 
 [새 통합판 ZIP 다운로드](https://github.com/himmelzu/making-game-for-real/raw/refs/heads/main/downloads/fm26-longplay-v2.zip) · [처음 검증한 자료](downloads/fm26-review.zip)
 

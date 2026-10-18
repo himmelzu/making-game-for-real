@@ -73,15 +73,11 @@ def build(vendor_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('vendor_runtime', type=Path)
-    args = parser.parse_args()
-    body, count = build(args.vendor_runtime)
-    target = ROOT / 'downloads/fm26-auto-beta-v3.zip'
-    target.write_bytes(body)
-    sha = hashlib.sha256(body).hexdigest()
-    target.with_suffix('.sha256').write_text(sha + '  ' + target.name + '\n')
-    print(json.dumps({'file': str(target), 'bytes': len(body), 'sha256': sha, 'files': count}))
+    raise SystemExit(
+        'Distribution withdrawn after Windows Security detection '
+        'Trojan:Script/Sabsik.Fl.A!ml. See docs/security-review.md. '
+        'Release generation is disabled pending investigation.'
+    )
 
 
 if __name__ == '__main__':
