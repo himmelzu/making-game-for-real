@@ -5,5 +5,7 @@ cd "$repo_root"
 python3 --version
 node --version
 python3 -m py_compile tools/*.py
+python3 -m py_compile automation/main.py automation/fm26auto/*.py
+node --check automation/ui/app.js
 node --test tests/*.cjs
 python3 -m unittest discover -s tests -p 'test_*.py'

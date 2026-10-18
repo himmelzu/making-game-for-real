@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>연예인 리그 · 시즌 도우미</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">FM26 · Windows 로컬 도구</p>
+        <h1>연예인 리그 시즌 도우미</h1>
+        <p class="intro">유소년이 들어온 시즌에 한 번, 기존 게임 DB의 연예인 이름과 사진을 묶어서 배정합니다. CSV를 직접 만들 필요가 없는 흐름을 목표로 합니다.</p>
+      </div>
+      <span id="connection" class="badge">게임 연결 전</span>
+    </header>
+
+    <aside class="notice experimental" aria-label="실험판 안내">
+      <strong>실제 게임에서 쓰기를 검증하지 않은 베타입니다.</strong>
+      <p>별도 세이브에서 먼저 확인하세요. 지원 버전이 맞지 않으면 적용을 차단합니다. 능력치를 고정하고 나이를 조정해도 모든 은퇴를 막는다고 보장할 수 없습니다.</p>
+    </aside>
+
+    <div id="error" class="notice error" role="alert" hidden></div>
+    <div id="progress" class="progress" role="status" aria-live="polite">로컬 도구에 연결하는 중입니다.</div>
+
+    <section class="panel" aria-labelledby="settings-title">
+      <div class="section-heading">
+        <span class="step">1</span>
+        <div><h2 id="settings-title">폴더와 커리어 설정</h2><p>스캔에서 게임 날짜를 읽으면 자동 입력합니다. 읽지 못하면 게임 화면의 날짜를 직접 입력하세요.</p></div>
+      </div>
+      <form id="settings-form" novalidate>
+        <div class="field">
+          <label for="photos-path">연예인 사진 폴더</label>
+          <div class="path-field"><input id="photos-path" type="text" autocomplete="off" spellcheck="false" placeholder="기존 celeb 폴더" required><button id="pick-photos" type="button" class="secondary">폴더 선택</button></div>
+        </div>
+        <div class="field">
+          <label for="graphics-path">FM26 graphics 폴더</label>
+          <div class="path-field"><input id="graphics-path" type="text" autocomplete="off" spellcheck="false" placeholder="FM26 사용자 폴더의 graphics" required><button id="pick-graphics" type="button" class="secondary">폴더 선택</button></div>
+          <p class="help">선택한 사진을 도구 전용 얼굴팩으로 복사합니다. 원본 사진은 바꾸지 않습니다.</p>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="game-date">게임 안의 현재 날짜</label><input id="game-date" type="date"><p id="date-source" class="help">먼저 폴더와 커리어 이름을 저장한 뒤 스캔하면 날짜 읽기를 시도합니다.</p></div>
+          <div class="field"><label for="career-label">커리어 이름</label><input id="career-label" type="text" maxlength="120" autocomplete="off" placeholder="예: SM 장기 커리어" required><p class="help">이 커리어를 구분할 이름을 계속 사용하세요.</p></div>
+        </div>
+        <div class="actions"><button id="save-settings" type="submit">설정 저장</button><span id="settings-note" class="muted">설정을 불러오는 중입니다.</span></div>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="scan-title">
+      <div class="section-heading"><span class="step">2</span><div><h2 id="scan-title">읽기 스캔과 첫 등록</h2><p>FM26에서 세이브를 불러온 뒤 스캔하세요. 읽기 스캔은 게임 데이터를 바꾸지 않습니다.</p></div></div>
+      <dl class="stats" aria-label="스캔 결과">
+        <div><dt>읽은 선수</dt><dd id="players-count">—</dd></div>
+        <div><dt>여성 선수</dt><dd id="female-count">—</dd></div>
+        <div><dt>배정에 쓸 원본</dt><dd id="donor-count">—</dd></div>
+        <div><dt>게임 버전</dt><dd id="game-version">—</dd></div>
+      </dl>
+      <p id="write-support" class="support muted">스캔 후 지원 버전을 확인합니다.</p>
+      <div class="actions"><button id="scan" type="button">게임 읽기 스캔</button><button id="baseline" type="button" class="secondary">현재 선수 첫 등록</button></div>
+      <p id="baseline-note" class="help">첫 등록은 현재 선수들을 기록해 이후 새로 발견되는 선수와 구분하는 단계입니다.</p>
+      <div class="state-summary" id="state-summary">아직 커리어 기록이 없습니다.</div>
+    </section>
+
+    <section class="panel" aria-labelledby="preview-title">
+      <div class="section-heading"><span class="step">3</span><div><h2 id="preview-title">이번 시즌 배정 후보</h2><p>첫 등록 후 새로 스캔에 나타난 선수를 확인합니다.</p></div></div>
+      <label class="check-row preview-option"><input id="include-existing" type="checkbox"><span><strong>현재 세이브에 이미 있는 14~18세 여성 선수도 후보에 포함</strong><span class="help">기존 실존 유망주도 포함될 수 있으니 대상을 확인하세요. 기존 보호 연예인과 이름 제공자는 제외합니다. 옵션을 바꾸면 미리보기를 다시 실행해야 합니다.</span></span></label>
+      <div class="actions"><button id="preview" type="button">배정 미리보기</button><button id="select-all" type="button" class="text-button">최대 1,000명 선택</button><button id="select-none" type="button" class="text-button">선택 해제</button><span id="selected-count" class="muted">0명 선택 · 최대 1,000명</span></div>
+      <p class="notice compact">이 목록이 실제 새 유소년이라는 확정은 아닙니다. 뒤늦게 로드된 기존 선수가 섞일 수 있으므로 이름과 나이를 확인한 뒤 선택하세요.</p>
+      <ul id="preview-warnings" class="warnings" aria-label="미리보기 확인 사항" hidden></ul>
+      <p id="candidates-empty" class="empty">스캔과 첫 등록을 마친 뒤 미리보기를 실행하세요.</p>
+      <div id="candidate-list" class="candidate-list" aria-label="선수 배정 선택 목록"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="apply-title">
+      <div class="section-heading"><span class="step">4</span><div><h2 id="apply-title">확인 후 한 번에 적용</h2><p>백그라운드에서 자동으로 반복 실행하지 않습니다.</p></div></div>
+      <label class="check-row maintenance-toggle"><input id="maintain" type="checkbox" checked><span><strong>기존 보호 선수도 유지</strong><span class="help">능력치 고정 플래그를 설정하고, 해당하는 선수의 나이를 28세에서 22세로 조정합니다. 원하지 않으면 해제하세요. 은퇴 전체 방지 기능은 아닙니다.</span></span></label>
+      <details id="maintenance-details"><summary id="maintenance-summary">유지 작업 미리보기 0건</summary><ul id="maintenance-list" class="maintenance-list"></ul></details>
+      <div class="acknowledgements">
+        <label class="check-row"><input id="paused" type="checkbox"><span>별도 세이브를 저장했고 게임을 일시정지했습니다.</span></label>
+        <label class="check-row"><input id="experimental-ack" type="checkbox"><span>실제 게임에서 쓰기를 검증하지 않은 실험판임을 확인했습니다.</span></label>
+      </div>
+      <p id="apply-reason" class="help">미리보기와 확인 항목을 완료하면 적용할 수 있습니다.</p>
+      <div class="actions"><button id="apply" type="button">선택한 항목 적용</button><button id="undo" type="button" class="secondary">마지막 적용 되돌리기</button></div>
+      <p class="help">사진 적용 후 FM26에서 스킨을 새로고침해야 표시될 수 있습니다. 저장 후 재실행해 이름·사진·선수 유지 상태를 확인하세요.</p>
+      <div id="last-result" class="result" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <footer>이 페이지는 이 PC의 로컬 도구와만 통신합니다. 다른 세이브를 불러왔다면 다시 스캔하고 커리어 이름을 확인하세요.</footer>
+  </main>
+</body>
+</html>

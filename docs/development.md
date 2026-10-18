@@ -2,10 +2,24 @@
 
 정적 HTML/JavaScript와 Python 표준 라이브러리만 사용합니다. 일반 도구 사용에는 Windows의 Edge/Chrome이면 됩니다. 상시 서버, npm 설치, 비밀키는 필요 없습니다.
 
+v3 자동화 앱의 Windows 프로세스 어댑터는 `automation/fm26auto`에 있습니다. UI는 `automation/ui`이고, 실행 시에만 이 PC의 loopback 서버를 열어 브라우저와 통신합니다. 클라우드에서 실제 FM26 실행은 지원하지 않으며 모의 메모리와 로컬 API로 검사합니다. 실제 게임 저장·재로드 검증과 구분해야 합니다.
+
 개발 검사는 Python 3.10 이상과 Node 18 이상에서 실행합니다.
 
 ```bash
 bash .codex/setup.sh
+```
+
+v3 통합 UI 검사(Playwright/Chromium 설치된 개발 환경, 게임은 모의 메모리):
+
+```bash
+python tests/browser_automation_check.py
+```
+
+v3 배포 ZIP 재생성은 [공식 Python 3.14.8 embeddable x64](https://www.python.org/ftp/python/3.14.8/python-3.14.8-embed-amd64.zip)를 먼저 받은 뒤 실행합니다. 빌더가 고정 SHA-256과 ZIP CRC를 확인하고 라이선스를 보존합니다.
+
+```bash
+python tools/build_automation_release.py /path/to/python-3.14.8-embed-amd64.zip
 ```
 
 원본 사진까지 확인하는 추가 검사:

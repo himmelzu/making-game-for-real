@@ -1,0 +1,14 @@
+{
+  "status": "EXPERIMENTAL_LIVE_FM26_UNVERIFIED",
+  "python_automation_tests": {"passed": 114, "failed": 0},
+  "browser_integration": {
+    "engine": "Chromium on Linux",
+    "backend": "Actual local HTTP server and app backend",
+    "game": "Simulated process memory",
+    "checks": ["Read-only baseline", "New youth detection", "Four name references", "Portrait config creation", "Protected ability flag and DOB", "Stale scan blocked", "Conditional undo"]
+  },
+  "real_photo_check": {"source_images": 118, "mapped_players": 118, "source_sha256": "pass", "publish_preflight_and_rollback": "pass"},
+  "fault_injection": ["Partial write", "Write/readback failure", "Process lease change", "Reused player address", "Wrong donor reference", "Gender change", "Modified portrait before undo", "Crash journal replay", "1500-operation bounded journal writes"],
+  "not_run": ["Windows executable startup", "Actual FM26 process scan and writes", "Game save/reload name persistence", "Shared name-reference lifetime", "Actual ability-freeze behavior", "Actual date-pattern match", "Long-term retirement behavior"],
+  "vendor": {"name": "CPython 3.14.8 Windows x64 embeddable", "archive_sha256": "a93abe456ab01bd96d7a085b3cdb6566b3063f4241360d114142fbdb07f0a310", "source": "https://www.python.org/ftp/python/3.14.8/python-3.14.8-embed-amd64.zip"}
+}
