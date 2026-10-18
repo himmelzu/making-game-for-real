@@ -15,6 +15,8 @@
 
 위 검사는 출처·포장 일치 확인입니다. Windows 백신 검사 통과나 실제 게임에서의 안전성 검증을 의미하지 않습니다. 탐지명만으로 파일의 구체적인 악성 동작을 설명하거나 오탐이라고 단정할 수 없습니다. Windows에서 패키지를 실행하지 않고 조사했습니다.
 
+[Microsoft의 해당 탐지 설명](https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Trojan%3AScript%2FSabsik.FL.A%21ml)도 구체적인 기술 분석을 제공하지 않습니다. [공식 명명 규칙](https://learn.microsoft.com/en-us/defender-xdr/malware-naming)은 `!` 뒤 접미사를 Microsoft 내부 지표로 설명하며, 이 표기만으로 이번 패키지의 원인을 특정할 수 없습니다.
+
 ## 사용자 측 처리
 
 Windows 보안이 제거했다면 그 상태를 유지하세요. 다운로드가 차단됐다는 화면만으로 프로그램 실행이나 PC 감염을 확인한 것은 아닙니다. 이미 실행했다면 도구를 종료하고 Windows 보안의 전체 검사를 진행하세요. 백신 보호 기록은 원인 조사에 필요합니다.

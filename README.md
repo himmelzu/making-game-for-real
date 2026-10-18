@@ -1,10 +1,14 @@
 # FM26 여자슈퍼연예인리그 · 장기 커리어 도우미
 
+[에디터용 단일 XML 통합 자료 다운로드](https://github.com/himmelzu/making-game-for-real/raw/refs/heads/main/downloads/fm26-unified-data.zip) · [적용 순서](docs/unified-editor.md)
+
+이번 자료에는 `FM26_unified.xml` 하나와 적용 안내 TXT만 있습니다. 기존 v2의 가장 많은 기능이 들어간 XML을 이름만 정리한 사본으로, 컵 수정·시작 나이 조정·16개국 국적 분산이 함께 들어 있습니다. CMD·EXE·Python은 포함하지 않습니다. 국적 분산은 실험 설정이며 국제대회 활성화나 기존 구단의 자국 선수 제한 해결을 보장하지 않습니다. FM26 Editor에서 새로 규칙 검증 후 FMF로 저장하고, 새 게임에 그 FMF 하나만 선택합니다.
+
 **2026-10-18: Windows 보안이 자동화 v3 ZIP을 `Trojan:Script/Sabsik.Fl.A!ml`로 탐지했다는 보고를 받아 배포를 중단했습니다.** 현재 브랜치의 ZIP 다운로드를 회수했으며, 악성 여부나 오탐 여부를 확정하지 못했습니다. 파일을 실행하거나 격리에서 복원하지 마세요. [탐지 사실과 확인 범위](docs/security-review.md)
 
 v3 소스는 원인 조사를 위해 보존합니다. 아래 v2는 FM26 Editor용 데이터와 브라우저 도우미이며, 회수한 Windows 실행 패키지와 별개입니다. 소스·공식 Python과 배포물의 해시가 일치한다는 검사만으로 백신 경고를 무시할 수는 없습니다.
 
-[새 통합판 ZIP 다운로드](https://github.com/himmelzu/making-game-for-real/raw/refs/heads/main/downloads/fm26-longplay-v2.zip) · [처음 검증한 자료](downloads/fm26-review.zip)
+[이전 v2 자료 다운로드](https://github.com/himmelzu/making-game-for-real/raw/refs/heads/main/downloads/fm26-longplay-v2.zip) · [처음 검증한 자료](downloads/fm26-review.zip)
 
 ZIP을 모두 풀고 `START_HERE.txt`를 읽은 뒤 `web/index.html`을 Edge 또는 Chrome으로 여세요. 사진은 기존 `celeb` 폴더를 선택하면 됩니다. 추가 사진은 필수가 아닙니다.
 
@@ -18,7 +22,7 @@ ZIP을 모두 풀고 `START_HERE.txt`를 읽은 뒤 `web/index.html`을 Edge 또
 | 기존 사진 밀림 대조 | 자막으로 확인한 118장과 실제 선수 이름·ID를 대조. 동명이인은 제외 |
 | 선수 유지 점검 | 첫 기록의 CA·PA와 현재 수치 비교, 나이 되돌리기 작업 목록 생성 |
 
-**기존 v2에는 게임의 자동 연예인 유소년 생성, 자동 이름 변경, 노화·은퇴 중지가 없습니다.** v2의 이름과 생년월일 변경은 인게임 에디터 수동 작업입니다. 새 v3는 별도 프로그램에서 실험적으로 일괄 이름·나이 적용을 시도하는 버전이며, 시작 나이 XML 자체가 노화를 멈추는 것은 아닙니다. [v2 적용 순서와 한계](docs/start-here.md)
+**기존 v2에는 게임의 자동 연예인 유소년 생성, 자동 이름 변경, 노화·은퇴 중지가 없습니다.** v2의 이름과 생년월일 변경은 인게임 에디터 수동 작업입니다. 자동화 v3는 보안 탐지 보고로 배포를 중단했습니다. 시작 나이 XML 자체가 노화를 멈추는 것은 아닙니다. [v2 적용 순서와 한계](docs/start-here.md)
 
 기본 이름 목록은 기존 사진 자막을 읽어 확인한 118장입니다. 사진을 재사용할 수 있고, 직접 구한 사진과 이름도 CSV로 추가할 수 있습니다. 검수 전 사진 845장의 번호를 추정해 이름에 연결하지 않습니다. 최신 연예인 명단을 새로 조사해 추가한 버전은 아닙니다. [사진 점검](docs/photos.md)
 

@@ -16,11 +16,15 @@ v3 통합 UI 검사(Playwright/Chromium 설치된 개발 환경, 게임은 모�
 python tests/browser_automation_check.py
 ```
 
-v3 배포 ZIP 재생성은 [공식 Python 3.14.8 embeddable x64](https://www.python.org/ftp/python/3.14.8/python-3.14.8-embed-amd64.zip)를 먼저 받은 뒤 실행합니다. 빌더가 고정 SHA-256과 ZIP CRC를 확인하고 라이선스를 보존합니다.
+v3 실행 패키지는 Windows 보안의 `Trojan:Script/Sabsik.Fl.A!ml` 탐지 보고로 회수했습니다. `tools/build_automation_release.py`의 배포 생성 명령도 중단했습니다. 아래 모의 테스트나 공식 Python과의 해시 일치는 백신 통과를 증명하지 않습니다. [보안 조사 범위](security-review.md)
+
+실행 파일이 없는 단일 XML 통합 자료를 재생성하려면:
 
 ```bash
-python tools/build_automation_release.py /path/to/python-3.14.8-embed-amd64.zip
+python tools/build_unified_editor.py
 ```
+
+이 명령은 보존된 v2의 누적 국적 변형을 읽어 XML 하나와 TXT 안내만 담은 ZIP을 만듭니다. 원본 v2를 바꾸지 않고, 실제 게임 검증을 수행하거나 자동화 실행 패키지를 만들지 않습니다.
 
 원본 사진까지 확인하는 추가 검사:
 
