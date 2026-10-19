@@ -57,9 +57,11 @@ def main():
                 assert z.testzip() is None
                 config = ET.fromstring(z.read('config.xml'))
                 assert [x.get('to') for x in config.find("list[@id='maps']")] == ['graphics/pictures/person/r-9000001/portrait', 'graphics/pictures/person/r-9000002/portrait']
+                assert [x.get('from') for x in config.find("list[@id='maps']")] == ['fm26_celeb_9000001', 'fm26_celeb_9000002']
                 for i, identity in enumerate(catalog[:2], 1):
-                    image = z.read(f'faces/face_{i:04}.png')
+                    image = z.read(f'fm26_celeb_{9000000+i}.png')
                     assert hashlib.sha256(image).hexdigest() == identity['sha256']
+                assert all('/' not in filename for filename in z.namelist())
             with page.expect_download() as event:
                 page.locator('#saveState').click()
             state_file = Path(tmp) / 'state.json'
@@ -85,8 +87,33 @@ def main():
             html = '<table><tr><th>고유 ID</th><th>이름</th><th>나이</th><th>구단</th></tr><tr><td>9000010</td><td>홍길동</td><td>16</td><td>팀</td></tr></table>'
             page.locator('#rosterFile').set_input_files({'name': 'roster.html', 'mimeType': 'text/html', 'buffer': html.encode()})
             expect(page.locator('#rosterStatus')).to_have_text('1명 / 여성으로 표시 0명')
+            # The simple helper now supports both explicit target kinds and
+            # gives every disjoint actual ID a unique, flat asset basename.
+            page.goto(f'http://127.0.0.1:{server.server_port}/face.html')
+            page.locator('#photoFolder').set_input_files(str(photos))
+            page.locator('#ids').fill('2002079023')
+            page.locator('#makePreview').click()
+            for mode, prefix in [('generated', 'r-'), ('database', '')]:
+                page.locator('#targetType').select_option(mode)
+                with page.expect_download() as event:
+                    page.locator('#downloadZip').click()
+                simple_archive = Path(tmp) / f'{mode}.zip'
+                event.value.save_as(simple_archive)
+                with zipfile.ZipFile(simple_archive) as zipped:
+                    assert zipped.testzip() is None
+                    assert set(zipped.namelist()) == {'config.xml', 'fm26_celeb_2002079023.png', 'READ_ME.txt'}
+                    config = ET.fromstring(zipped.read('config.xml'))
+                    mapping = list(config.find("list[@id='maps']"))[0]
+                    assert mapping.get('from') == 'fm26_celeb_2002079023'
+                    assert mapping.get('to') == f'graphics/pictures/person/{prefix}2002079023/portrait'
+                    assert zipped.read('fm26_celeb_2002079023.png').startswith(b'\x89PNG\r\n\x1a\n')
+                    extracted = Path(tmp) / f'{mode}_pack'
+                    zipped.extractall(extracted)
+                page.locator('#layoutFolder').set_input_files(str(extracted))
+                expect(page.locator('#layoutStatus')).to_contain_text('경로 일치 1개')
+                expect(page.locator('#layoutStatus')).to_contain_text('호환성 주의: 0개')
             assert not errors, errors
-            print(json.dumps({'browser': 'Chromium', 'real_photos': 963, 'zip_crc': 'pass', 'photo_hash': 'pass', 'state_roundtrip': 'pass', 'club_change': 'pass', 'next_season': 'pass', 'maintenance': 'pass', 'html_import': 'pass', 'page_errors': errors}))
+            print(json.dumps({'browser': 'Chromium', 'real_photos': 963, 'zip_crc': 'pass', 'photo_hash': 'pass', 'state_roundtrip': 'pass', 'club_change': 'pass', 'next_season': 'pass', 'maintenance': 'pass', 'html_import': 'pass', 'simple_face_both_target_kinds': 'pass', 'unique_flat_png_layout': 'pass', 'layout_checker': 'pass', 'page_errors': errors}))
             browser.close()
     finally:
         server.shutdown()

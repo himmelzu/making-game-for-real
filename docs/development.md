@@ -1,5 +1,7 @@
 # 개발 환경과 재생성
 
+현재 후속판은 `python tools/build_full_face_fix.py`로 현재 세이브용 config를 만든 뒤 `python tools/build_followup_release.py --face-configs downloads/fm26-face-current-save.zip`으로 묶습니다. 얼굴 보정 빌드는 검토한 원본 사진 폴더가 필요하며 PNG를 출력하지 않습니다. `tools/face_identity_index.py`는 인물의 과거 UID 변경 기록을 보존한 채 국적·생년월일 값만 일치시키며, 재정 변경과 함께 새 XML 하나에 적용합니다.
+
 정적 HTML/JavaScript와 Python 표준 라이브러리만 사용합니다. 일반 도구 사용에는 Windows의 Edge/Chrome이면 됩니다. 상시 서버, npm 설치, 비밀키는 필요 없습니다.
 
 v3 자동화 앱의 Windows 프로세스 어댑터는 `automation/fm26auto`에 있습니다. UI는 `automation/ui`이고, 실행 시에만 이 PC의 loopback 서버를 열어 브라우저와 통신합니다. 클라우드에서 실제 FM26 실행은 지원하지 않으며 모의 메모리와 로컬 API로 검사합니다. 실제 게임 저장·재로드 검증과 구분해야 합니다.

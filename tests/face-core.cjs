@@ -51,10 +51,10 @@ test('escapes XML attribute characters and rejects invalid XML controls', () => 
 test('mapping keeps identical source filenames separate and omits original paths', () => {
   const photos = [{ name: 'same.png', size: 10 }, { name: 'same.png', size: 20 }];
   const plan = core.makePlan(['123', 'r-456'], [0, 1], photos);
-  assert.deepEqual(plan.assets.map(a => a.path), ['faces/face_0001.png', 'faces/face_0002.png']);
+  assert.deepEqual(plan.assets.map(a => a.path), ['fm26_celeb_123.png', 'fm26_celeb_456.png']);
   assert.equal(plan.mappings[0].to, 'graphics/pictures/person/r-123/portrait');
-  assert.equal(plan.mappings[1].from, 'faces/face_0002');
-  assert.match(plan.xml, /from="faces\/face_0001" to="graphics\/pictures\/person\/r-123\/portrait"/);
+  assert.equal(plan.mappings[1].from, 'fm26_celeb_456');
+  assert.match(plan.xml, /from="fm26_celeb_123" to="graphics\/pictures\/person\/r-123\/portrait"/);
   assert.ok(!plan.xml.includes('same.png'));
   assert.equal(plan.totalPhotoBytes, 30);
 });
@@ -64,6 +64,25 @@ test('shared photos are copied once; unselected photos are omitted', () => {
   assert.equal(plan.mappings[0].from, plan.mappings[1].from);
   assert.equal(plan.totalPhotoBytes, 30);
   assert.deepEqual(plan.assets.map(a => a.sourceIndex), [1, 0]);
+  assert.deepEqual(plan.assets.map(a => a.path), ['fm26_celeb_1.png', 'fm26_celeb_3.png']);
+});
+test('FM26 compatibility layout puts unique actual-ID filenames beside config and avoids reused basenames across disjoint packs', () => {
+  const first = core.makePlan(['2002079023', '2002079024'], [0, 1], [{ size: 10 }, { size: 20 }]);
+  const second = core.makePlan(['2002079025', '2002079026'], [0, 1], [{ size: 10 }, { size: 20 }]);
+  const basenames = [...first.assets, ...second.assets].map(asset => asset.path);
+  assert.equal(new Set(basenames).size, 4);
+  assert.ok(basenames.every(name => /^fm26_celeb_[1-9][0-9]*\.png$/.test(name) && !name.includes('/')));
+  for (const plan of [first, second]) assert.ok(plan.mappings.every(row => plan.assets.some(asset => asset.from === row.from && asset.path === row.from + '.png')));
+  assert.ok(!first.xml.includes('faces/'));
+});
+test('Explicit database mode emits bare IDs even for 2-billion IDs and does not change the photo layout', () => {
+  const photos = [{ size: 10 }], ids = ['2002079023'];
+  const generated = core.makePlan(ids, [0], photos);
+  const database = core.makePlan(ids, [0], photos, { targetType: 'database' });
+  assert.equal(generated.mappings[0].to, 'graphics/pictures/person/r-2002079023/portrait');
+  assert.equal(database.mappings[0].to, 'graphics/pictures/person/2002079023/portrait');
+  assert.deepEqual(generated.assets, database.assets);
+  assert.throws(() => core.makePlan(ids, [0], photos, { targetType: 'guess' }), /선수 종류/);
 });
 test('rejects missing mappings, duplicate IDs, out-of-range selections and size limits', () => {
   for (const indexes of [[null], [-1], [1], [0.5], []]) {
@@ -91,7 +110,7 @@ test('CRC32 matches the standard test vector and PNG signature validation', () =
   assert.equal(core.hasPngSignature(new Uint8Array()), false);
 });
 test('ZIP local headers, central directory, data CRC and EOCD remain consistent', () => {
-  const entries = [{ path: 'config.xml', bytes: encode('<record/>') }, { path: 'faces/face_0001.png', bytes: Uint8Array.from([0, 1, 2, 255]) }];
+  const entries = [{ path: 'config.xml', bytes: encode('<record/>') }, { path: 'fm26_celeb_2002079023.png', bytes: Uint8Array.from([0, 1, 2, 255]) }];
   const result = core.buildZipParts(entries);
   const zip = Buffer.concat(result.parts.map(p => Buffer.from(p)));
   assert.equal(zip.length, result.size);

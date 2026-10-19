@@ -7,7 +7,7 @@
 <style>
 :root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#e9eaf3;background:#111323;color-scheme:dark}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:36px 22px 70px}h1{font-size:32px;letter-spacing:-1px;margin:12px 0}h2{font-size:21px}p,li{line-height:1.8}.muted{color:#aeb5cd;font-size:14px}.tag{color:#9ce4c4;letter-spacing:2px;font-size:12px}section{background:#1c2035;border:1px solid #333952;border-radius:16px;padding:24px;margin-top:20px}.note{border-left:3px solid #ffca87;padding-left:15px;color:#ffddb0}label{display:block;margin:13px 0 7px}input,textarea,button{font:inherit}input[type=text],input[type=date],input[type=number],textarea{background:#111628;border:1px solid #5d6689;border-radius:7px;padding:10px;color:#fff;width:100%}input[type=file]{max-width:100%}textarea{min-height:180px;resize:vertical;font-size:13px}button{background:#a8e4c8;color:#0f3024;border:0;border-radius:7px;padding:11px 16px;font-weight:700;margin:6px 8px 6px 0;cursor:pointer}button:disabled{opacity:.4;cursor:default}.secondary{background:#323c5a;color:#e9eaf3}a{color:#a8e4c8}.row{display:flex;gap:20px;flex-wrap:wrap}.row>div{flex:1;min-width:180px}.status{white-space:pre-wrap;overflow-wrap:anywhere;color:#d1e9de;margin-top:15px;line-height:1.7}.error{color:#ffb3b3}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;border-bottom:1px solid #3d4564;padding:10px;overflow-wrap:anywhere}.scroll{overflow:auto;max-height:440px}code{overflow-wrap:anywhere}summary{cursor:pointer}details{margin-top:16px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card{background:#14192b;padding:16px;border-radius:10px}:focus-visible{outline:3px solid #ffca87;outline-offset:3px}.preview{width:48px;height:48px;object-fit:contain}footer{margin-top:25px}
 </style>
-<script src="core.js" defer></script><script src="career-core.js" defer></script><script src="catalog.js" defer></script><script src="career-app.js" defer></script>
+<script src="core.js" defer></script><script src="career-core.js" defer></script><script src="catalog.js" defer></script><script src="youth-catalog.js" defer></script><script src="career-app.js" defer></script>
 </head>
 <body><main>
 <div class="tag">FM26 · CELEBRITY CAREER COMPANION</div>
@@ -31,7 +31,7 @@
 <p id="rosterStatus" class="status" role="status"></p></section>
 <section><h2>3. 사진과 연예인 이름 목록</h2>
 <label for="photos">기존 얼굴팩의 celeb 폴더</label><input id="photos" type="file" webkitdirectory directory multiple accept=".png,image/png">
-<p class="muted">기본 목록은 사진 아래에 적힌 이름을 직접 읽어 확인한 118장입니다. 얼굴 인식이나 파일 번호 추정으로 이름을 붙이지 않았습니다. 목록에 있는 원본 PNG는 SHA-256도 대조합니다. 현재 갖고 있는 파일을 선택하면 되며 사진을 다시 받을 필요는 없습니다.</p>
+<p class="muted">기본 목록은 선수용 사진 963장의 하단 이름을 직접 읽은 전체 목록입니다. 같은 사람의 다른 사진과 동명이인도 포함하므로 서로 다른 연예인이 963명이라는 뜻은 아닙니다. 사진 원본 SHA-256도 대조합니다. 현재 갖고 있는 파일을 선택하면 되며 사진을 다시 받을 필요는 없습니다. 기존 선수의 잘못된 연결을 고치려면 별도의 얼굴 복구 페이지를 사용하세요.</p>
 <label for="customCatalog">내 연예인 목록 CSV (선택, 기본 목록 대신 사용)</label><input id="customCatalog" type="file" accept=".csv,text/csv">
 <p class="muted"><code>name,path,sha256</code> 머리글을 사용합니다. path는 선택한 폴더 안의 PNG 상대 경로, sha256은 모르면 빈칸입니다. 새 사진과 이름을 추가하면 다음 배정부터 사용할 수 있습니다. 기존 배정은 기록에 남습니다.</p>
 <label><input id="reuse" type="checkbox" checked> 목록을 모두 사용하면 같은 연예인 이름·사진 재사용</label>
@@ -45,7 +45,7 @@
 <label><input id="regenPrefix" type="checkbox" checked> 선택한 선수는 생성 선수입니다 (config에 r-ID 사용)</label>
 <label for="batch">얼굴팩 묶음 번호 (한 묶음 최대 300명)</label><input id="batch" type="number" min="1" step="1" value="1">
 <button id="faceZip" disabled>선택 묶음 얼굴팩 ZIP</button><button id="names" disabled class="secondary">전체 이름 수정 목록 CSV</button><button id="saveState" disabled class="secondary">시즌 기록 JSON 저장</button>
-<p class="muted">ZIP의 config.xml과 faces 폴더를 함께 그래픽 폴더 안의 별도 폴더에 넣습니다. 같은 ID가 있는 이전 시즌 도우미 폴더는 빼고 교체해 중복을 피하세요. 다른 얼굴팩에 같은 ID가 있으면 로딩 순서에 의존하지 말고 그 매핑을 백업 후 제외하세요. 게임의 캐시·그래픽 새로고침을 실행하고 확인합니다.</p>
+<p class="muted">ZIP의 config.xml과 <code>fm26_celeb_실제ID.png</code> 사진들을 같은 새 폴더에 두고 현재 게임이 읽는 graphics 안에 넣습니다. FM26의 그래픽 호환성 보고를 고려해 같은 폴더와 고유 파일명을 사용합니다. 같은 ID가 있는 이전 시즌 도우미 폴더는 graphics 밖으로 빼고 교체해 중복을 피하세요. 다른 얼굴팩의 동일 ID도 확인하고 게임을 완전히 종료한 뒤 다시 실행해 표시를 확인합니다.</p>
 <p class="note">CSV는 게임이 자동으로 읽는 파일이 아닙니다. 배정 이름을 인게임 에디터의 이름 항목 또는 게임의 별명 기능으로 직접 입력해야 합니다. 별명은 표시 범위가 다를 수 있습니다. 사진을 연결해도 원래 이름은 그대로입니다.</p>
 <p id="exportStatus" class="status" role="status"></p></section>
 <section><h2>5. 기존 선수 장기 유지 점검</h2>

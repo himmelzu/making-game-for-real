@@ -1,7 +1,7 @@
 'use strict';
 (function () {
   const C = window.FMCareer, F = window.FMFaceCore, $ = id => document.getElementById(id);
-  let state = null, pool = C.catalog(window.FMCelebrityCatalog), photos = [], active = [], roster = [], busy = false;
+  let state = null, pool = C.catalog(window.FMYouthCatalog || window.FMCelebrityCatalog), photos = [], active = [], roster = [], busy = false;
   const previewURLs = [];
   $('poolCount').textContent = pool.length + '장 · 이름 자막 확인';
   function status(where, message, error) { $(where).textContent = message; $(where).classList.toggle('error', !!error); }
@@ -80,8 +80,7 @@
     status('exportStatus', '사진 경로·PNG 형식·확인된 원본 해시를 검사하는 중…');
     const files = [], byPath = new Map(), indexes = [];
     for (const a of selected) { if (!byPath.has(a.path)) { byPath.set(a.path, files.length); files.push(findPhoto(a.path)); } indexes.push(byPath.get(a.path)); }
-    const plan = F.makePlan(selected.map(a => a.id), indexes, files);
-    if (!$('regenPrefix').checked) plan.xml = plan.xml.replace(/person\/r-/g, 'person/');
+    const plan = F.makePlan(selected.map(a => a.id), indexes, files, { targetType: $('regenPrefix').checked ? 'generated' : 'database' });
     const enc = new TextEncoder(), entries = [{ path: 'config.xml', bytes: enc.encode(plan.xml) }];
     for (const asset of plan.assets) {
       const file = files[asset.sourceIndex], bytes = new Uint8Array(await file.arrayBuffer());
@@ -95,6 +94,7 @@
       entries.push({ path: asset.path, bytes });
     }
     entries.push({ path: 'assignments.csv', bytes: enc.encode(C.csv(selected, ['id', 'original', 'name', 'path'])) });
+    entries.push({ path: 'READ_ME.txt', bytes: enc.encode('config.xml과 fm26_celeb_실제ID.png 파일을 같은 새 폴더에 두고 게임이 읽는 graphics 안에 넣으세요. faces 하위 폴더는 사용하지 않습니다. 이전에 같은 ID로 만든 도우미 폴더는 graphics 밖으로 빼고 교체하세요. FM26 그래픽 표시 문제 보고를 고려해 같은 폴더와 고유 파일명을 사용하지만 실제 게임 표시는 별도 확인이 필요합니다. 선수 이름은 CSV를 보고 직접 수정해야 합니다.\r\n') });
     const zip = F.buildZipParts(entries); download('fm26-faces-batch-' + batch + '.zip', new Blob(zip.parts, { type: 'application/zip' }));
     status('exportStatus', selected.length + '명 얼굴팩을 저장했습니다. 전체 ' + Math.ceil(active.length / 300) + '개 묶음 중 ' + batch + '번입니다. 기존 같은 ID의 매핑을 중복 적용하지 마세요.');
   }));

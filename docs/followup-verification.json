@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-19",
+  "timezone": "Asia/Seoul",
+  "scope": "Static data, source-preservation, local browser integration; no FM26/Editor runtime",
+  "setup_command": "FM26_FACE_TEST_SOURCE=/path/to/celeb bash .codex/setup.sh",
+  "python": {
+    "passed": 136,
+    "failed": 0
+  },
+  "javascript": {
+    "passed": 55,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "engine": "Chromium Linux",
+    "original_player_photos": 963,
+    "original_configs": 33,
+    "repair_preset_two_live_ids": true,
+    "caption_name_precedence_collision_check": true,
+    "youth_catalog_photos": 963,
+    "repair_reviewed_photos": 963,
+    "repair_active_photos": 959,
+    "generated_and_database_modes": true,
+    "unique_flat_png_layout": true,
+    "png_hashes": "pass",
+    "zip_crc": "pass",
+    "state_roundtrip_and_next_season": "pass",
+    "external_requests": 0,
+    "page_errors": 0
+  },
+  "full_face_pack": {
+    "reviewed_photos": 963,
+    "mapped_ids": 959,
+    "directly_user_verified_ids": 4,
+    "inferred_other_ids": 955,
+    "duplicate_alternates": 4,
+    "caption_difference_warnings": 46,
+    "source_staff_maps_retained": 41,
+    "conflicting_source_staff_maps_removed": 6
+  },
+  "editor_changes": {
+    "initial_finance_clubs": 39,
+    "recurring_payment_teams": 500,
+    "old_nationality_alias_records_aligned": 723,
+    "old_birthdate_alias_records_aligned": 51
+  },
+  "not_verified": [
+    "FM26 Editor import/rule validation/FM F compilation",
+    "Actual face display in FM26",
+    "First-season and later recurring payments",
+    "Actual national-team selection/World Cup progress",
+    "Source model IDs beyond the four user-confirmed anchors",
+    "Displayed currency and wage period"
+  ],
+  "retired_native_v3_included": false
+}

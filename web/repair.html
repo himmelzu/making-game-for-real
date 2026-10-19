@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>FM26 기존 연예인 얼굴 연결 복구</title>
+  <style>
+    :root { color-scheme:light; font-family:system-ui,'Malgun Gothic',sans-serif; color:#192d35; background:#eef4f4; }
+    * { box-sizing:border-box; } body { margin:0; } main { max-width:1140px; margin:auto; padding:30px 22px 60px; }
+    h1 { font-size:30px; margin:10px 0; } h2 { font-size:20px; } p,li { line-height:1.7; } section { background:#fff; border:1px solid #ccdada; border-radius:12px; padding:22px; margin:20px 0; }
+    .muted { color:#51686e; font-size:14px; } .note { background:#fff4df; border-left:4px solid #a36b1f; padding:12px 15px; }
+    label { display:block; margin:14px 0 7px; font-weight:650; } input[type=file] { display:block; max-width:100%; } input[type=checkbox] { margin-right:7px; }
+    textarea { width:100%; min-height:140px; padding:12px; font:14px ui-monospace,monospace; border:1px solid #91a9ad; border-radius:7px; }
+    button { background:#146b5d; color:white; padding:11px 18px; border:1px solid #146b5d; border-radius:7px; font:inherit; font-weight:650; cursor:pointer; margin:8px 8px 0 0; }
+    button:disabled { opacity:.45; cursor:default; } button.secondary { background:white; color:#195950; }
+    :focus-visible { outline:3px solid #a86a00; outline-offset:3px; } .status { white-space:pre-wrap; line-height:1.7; } .error { color:#a82020; }
+    .scroll { overflow:auto; max-height:620px; } table { border-collapse:collapse; width:100%; font-size:13px; } th,td { border-bottom:1px solid #d8e3e5; padding:10px; text-align:left; vertical-align:top; } th { background:#f0f6f6; position:sticky; top:0; }
+    td { overflow-wrap:anywhere; } img { width:64px; height:64px; object-fit:contain; } code { overflow-wrap:anywhere; } .badges { display:flex; gap:12px; flex-wrap:wrap; } .badges span { background:#e5f3ec; padding:8px 12px; border-radius:6px; }
+    summary { cursor:pointer; font-weight:650; } a { color:#086957; } [hidden] { display:none !important; }
+    @media(max-width:640px) { main { padding:20px 12px; } section { padding:17px; } h1 { font-size:25px; } }
+  </style>
+  <script src="core.js" defer></script>
+  <script src="career-core.js" defer></script>
+  <script src="catalog.js" defer></script>
+  <script src="repair-catalog.js" defer></script>
+  <script src="repair-core.js" defer></script>
+  <script src="repair-app.js" defer></script>
+</head>
+<body>
+<main>
+  <p class="muted">FM26 · 기존 얼굴팩 config 복구 · 오프라인</p>
+  <h1>선수 이름에 맞는 연예인 사진 다시 연결하기</h1>
+  <p>현재 게임의 실제 선수 ID와 사진 아래에 적힌 이름을 대조해, 기존 얼굴팩의 <code>config.xml</code> 교체 파일을 만듭니다. 게임이나 세이브 파일에 접근하지 않으며 선택한 파일을 인터넷으로 보내지 않습니다.</p>
+  <p class="note"><strong>전체 사진을 한 번에 같은 번호만큼 밀지 않습니다.</strong> 사진에 적힌 이름과 검수한 별칭을 현재 세이브의 실제 ID·이름 목록과 대조합니다. 이름이 명단과 사진 목록에서 각각 하나뿐인 경우만 연결합니다. 동명이인과 실제 ID를 확인하지 않은 선수까지 자동으로 고쳤다고 표시하지 않습니다. 이름·국적·능력치는 바뀌지 않습니다.</p>
+  <p id="repairCatalogCount" class="muted" role="status">검수 사진 목록을 읽는 중입니다.</p>
+
+  <section>
+    <h2>1. 현재 쓰는 celeb 폴더 선택</h2>
+    <label for="repairFolder">하위 폴더의 config.xml과 PNG가 모두 있는 celeb 폴더</label>
+    <input id="repairFolder" type="file" webkitdirectory directory multiple>
+    <p class="muted">사진만 선택하면 기존의 잘못된 연결을 제거할 수 없습니다. <code>SM/config.xml</code>, <code>플레디스/config.xml</code> 등을 포함한 얼굴팩 전체를 선택하세요. EXE·CMD 등 다른 파일은 읽지 않습니다. 원본은 수정하지 않습니다.</p>
+    <p id="folderStatus" class="status" role="status">선택한 폴더가 없습니다.</p>
+  </section>
+
+  <section>
+    <h2>2. 실제 게임의 선수 ID·이름 입력</h2>
+    <button id="reportedCases" type="button" class="secondary" disabled>알려주신 두 사례 불러오기: 제시카·이현주</button>
+    <p class="muted">현재 세이브에서 알려주신 제시카 <code>2002043293</code>·이현주 <code>2002043294</code>입니다. 관련 원본 config와 사진 4장의 해시가 같을 때만 이 버튼을 켭니다. 다른 선수의 ID를 추정하지 않습니다.</p>
+    <p>현재 세이브의 여자 연예인 선수 목록을 사용하세요. <strong>필수 열은 <code>id,name</code></strong>이고 <code>club</code>은 선택입니다. 한국어 <code>고유 ID,이름,구단</code> 머리글과 탭 구분 표도 읽습니다. ID를 숫자만 보고 추정하거나 사진 파일명에서 복사하지 마세요.</p>
+    <label for="repairRosterFile">CSV·TSV 또는 선수 표가 하나인 HTML 파일</label>
+    <input id="repairRosterFile" type="file" accept=".csv,.tsv,.txt,.html,.htm,text/csv,text/plain,text/html">
+    <label for="repairRoster">또는 실제 ID·이름을 직접 입력·붙여넣기</label>
+    <textarea id="repairRoster" spellcheck="false" placeholder="id,name,club&#10;머리글 아래에 현재 게임에서 확인한 실제 선수 ID와 이름을 입력하세요."></textarea>
+    <p class="muted">선수 목록에 ID가 없다면 그 파일만으로는 자동 복구할 수 없습니다. 게임의 고유번호 표시 기능이나 실제 프로필에서 번호를 확인해 추가하세요. 사용 중인 FM26 화면이 목록 출력이나 ID 열을 제공한다고 가정하지 않습니다. 정확한 이름과 검수한 별칭만 대조하며 동명이인은 제외합니다.</p>
+    <label><input id="actualRoster" type="checkbox"> 현재 세이브에서 확인한 여자 연예인 선수 ID·이름입니다.</label>
+    <button id="repairPreview" type="button">이름·사진·충돌 대조하기</button>
+    <p id="repairStatus" class="status" role="status"></p>
+  </section>
+
+  <section id="repairResults" hidden>
+    <h2>3. 변경 내용 확인</h2>
+    <div id="repairCounts" class="badges"></div>
+    <p class="muted">기존 사진의 <code>r-</code> 유무를 그대로 유지합니다. 수정 대상 ID에 다른 사진이 연결된 경우, 해당 잘못된 매핑도 다른 폴더까지 검사해 제외합니다. 아직 검수하지 않은 사진이 연결을 잃을 수 있으며 아래에서 따로 표시합니다.</p>
+    <div class="scroll"><table><thead><tr><th>원본 사진</th><th>이름 · 실제 ID</th><th>사진 경로</th><th>기존 연결 → 새 연결</th></tr></thead><tbody id="repairRows"></tbody></table></div>
+    <details id="repairImpact"><summary id="repairImpactSummary">충돌·미확인 항목</summary><p id="repairImpactText" class="status"></p></details>
+    <p class="note"><strong>백업은 graphics 폴더 밖에 보관하세요.</strong> 새 파일은 원본과 같은 위치의 config.xml을 교체하는 용도입니다. 예전 config를 다른 이름의 XML로 같은 그래픽 폴더에 남기거나 새 팩을 덧붙이는 방식은 사용하지 마세요.</p>
+    <label><input id="repairReviewed" type="checkbox"> 사진·실제 ID와 충돌 영향을 확인했습니다. 적용 전 원본 config를 graphics 밖에 백업하겠습니다.</label>
+    <button id="repairDownload" type="button" disabled>교체용 config ZIP 다운로드</button>
+    <p id="repairExportStatus" class="status" role="status"></p>
+  </section>
+
+  <section>
+    <h2>4. 기존 얼굴팩에 적용</h2>
+    <ol>
+      <li>현재 <code>celeb</code> 폴더 또는 그 안의 원본 config를 <strong>graphics 밖</strong>에 백업합니다.</li>
+      <li>다운로드한 ZIP을 먼저 별도 임시 폴더에 풉니다. <code>SM/config.xml</code> 같은 폴더 구조와 <code>REPAIR_README.txt</code>를 확인합니다.</li>
+      <li>ZIP의 하위 폴더들을 현재 <code>celeb</code> 폴더 안에 복사해 <strong>기존 config.xml을 교체</strong>합니다. 원래 PNG는 그대로 둡니다. 이 ZIP에는 사진이 없습니다.</li>
+      <li>게임을 완전히 종료하고 다시 실행해 세이브를 불러옵니다. 버전에서 제공하는 그래픽 캐시 초기화·새로고침 기능도 사용할 수 있습니다.</li>
+      <li>대조한 선수의 이름·사진을 확인합니다. 다른 위치에 같은 선수 ID를 연결한 config가 있으면 그쪽도 별도로 확인해야 합니다. 되돌릴 때는 백업한 원래 config를 복원합니다.</li>
+    </ol>
+    <p class="muted">얼굴 연결 교체만으로는 새 게임이 필요하지 않습니다. 실제 FM26에서의 표시 결과는 적용 후 확인해야 합니다. 국적·구단 규칙을 바꾼 FMF의 새 게임 요구와는 별개입니다.</p>
+  </section>
+</main>
+</body>
+</html>

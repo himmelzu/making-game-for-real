@@ -2,7 +2,7 @@
   'use strict';
   const core = window.FMFaceCore;
   const $ = function (id) { return document.getElementById(id); };
-  const folder = $('photoFolder'), idsInput = $('ids'), sortOrder = $('sortOrder'), includeStaff = $('includeStaff');
+  const folder = $('photoFolder'), idsInput = $('ids'), sortOrder = $('sortOrder'), includeStaff = $('includeStaff'), targetType = $('targetType');
   const preview = $('previewSection'), list = $('mappingList'), dialog = $('photoDialog');
   const rowUrls = new Map(), dialogUrls = new Set(), downloadUrls = new Set();
   const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
@@ -29,7 +29,7 @@
     const missing = rows.filter(function (row) { return row.photoIndex === null; }).length;
     const used = new Set(rows.filter(function (row) { return row.photoIndex !== null; }).map(function (row) { return row.photoIndex; }));
     const bytes = Array.from(used).reduce(function (sum, index) { return sum + photos[index].size; }, 0);
-    let message = '유소년 ' + rows.length + '명 · 폴더의 PNG ' + photos.length + '장 · 선택한 사진 ' + used.size + '장';
+    let message = '유소년 ' + rows.length + '명 · 폴더의 PNG ' + photos.length + '장 · 선택한 사진 ' + used.size + '장\n연결 종류: ' + (targetType.value === 'database' ? '기본 DB / 숫자 ID' : '생성 선수 / r-ID');
     if (missing) message += '\n사진이 없는 선수 ' + missing + '명: 각각 선택하거나 아래 반복 배정 버튼을 사용하세요.';
     else if (photos.length > rows.length) message += '\n연결하지 않은 사진은 ZIP에 넣지 않습니다.';
     else if (photos.length < rows.length) message += '\n같은 사진을 여러 선수에게 연결했습니다. ZIP에는 사진마다 한 번만 복사합니다.';
@@ -38,7 +38,7 @@
     $('downloadZip').disabled = busy || Boolean(missing) || !rows.length;
     $('zipSummary').textContent = '사용 사진 합계 ' + sizeText(bytes) + ' · config.xml + 선택 사진만 포함';
     if (!missing) {
-      try { core.makePlan(rows.map(function (r) { return r.id; }), rows.map(function (r) { return r.photoIndex; }), photos); }
+      try { core.makePlan(rows.map(function (r) { return r.id; }), rows.map(function (r) { return r.photoIndex; }), photos, { targetType: targetType.value }); }
       catch (error) { status('mappingStatus', error.message, true); $('downloadZip').disabled = true; }
     }
   }
@@ -107,6 +107,7 @@
   includeStaff.addEventListener('change', applyPhotoFilter);
   idsInput.addEventListener('input', invalidate);
   sortOrder.addEventListener('change', invalidate);
+  targetType.addEventListener('change', updatePlanStatus);
   $('makePreview').addEventListener('click', function () {
     try {
       if (!photos.length) throw new Error('먼저 PNG 얼굴 사진이 있는 폴더를 선택해 주세요.');
@@ -128,14 +129,14 @@
   });
   function setBusy(value) {
     busy = value;
-    [folder, includeStaff, idsInput, sortOrder, $('makePreview'), $('repeatAssign')].forEach(function (el) { el.disabled = value; });
+    [folder, includeStaff, idsInput, sortOrder, targetType, $('makePreview'), $('repeatAssign')].forEach(function (el) { el.disabled = value; });
     list.querySelectorAll('button').forEach(function (button) { button.disabled = value; });
     updatePlanStatus();
   }
   $('downloadZip').addEventListener('click', async function () {
     try {
       setBusy(true); status('downloadStatus', '선택한 사진을 확인하고 새 ZIP을 만드는 중입니다…');
-      const plan = core.makePlan(rows.map(function (r) { return r.id; }), rows.map(function (r) { return r.photoIndex; }), photos);
+      const plan = core.makePlan(rows.map(function (r) { return r.id; }), rows.map(function (r) { return r.photoIndex; }), photos, { targetType: targetType.value });
       const entries = [{ path: 'config.xml', bytes: new TextEncoder().encode(plan.xml) }];
       for (let index = 0; index < plan.assets.length; index++) {
         const asset = plan.assets[index], file = photos[asset.sourceIndex];
@@ -146,13 +147,23 @@
         entries.push({ path: asset.path, bytes: bytes });
         status('downloadStatus', '사진 ' + (index + 1) + '/' + plan.assets.length + '장 준비됨…');
       }
+      entries.push({ path: 'READ_ME.txt', bytes: new TextEncoder().encode([
+        'FM26 유소년 얼굴 연결', '',
+        'config.xml과 fm26_celeb_실제ID.png 파일들을 같은 새 폴더에 함께 두세요. faces 하위 폴더는 만들지 않습니다.',
+        '이 폴더를 현재 게임이 실제로 읽는 graphics 폴더 아래에 넣고 게임을 종료한 뒤 다시 실행해 확인하세요.',
+        '사진 파일명은 선수 ID와 같아야 하는 규칙이 아닙니다. config의 from이 PNG 파일명(확장자 제외)과 같아야 합니다.',
+        'FM26의 같은 파일명·하위 사진 경로 표시 문제 보고를 고려해 실제 ID를 포함한 고유 이름과 같은 폴더 구조를 사용합니다.',
+        '선택한 모든 사진이 실제 FM26에서 표시된다고 검증한 것은 아닙니다. 실제 선수 ID와 다른 팩의 중복 ID·파일명도 확인하세요.',
+        '이번 출력 선수 종류: ' + (targetType.value === 'generated' ? '생성 선수 / r-ID' : '기본 DB 선수 / 숫자 ID') + '. 나이·ID 크기·시작부터 유소년이라는 사실만으로 종류를 확정할 수 없습니다.',
+        '이전에 같은 선수 ID로 만든 도우미 폴더는 graphics 밖으로 빼고 교체하세요. 이름·능력치·국적은 바뀌지 않습니다.'
+      ].join('\r\n')) });
       const zip = core.buildZipParts(entries), blob = new Blob(zip.parts, { type: 'application/zip' });
       const url = URL.createObjectURL(blob); downloadUrls.add(url);
       const link = document.createElement('a'), date = new Date();
       const stamp = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0'), '_', String(date.getHours()).padStart(2, '0'), String(date.getMinutes()).padStart(2, '0'), String(date.getSeconds()).padStart(2, '0')].join('');
       link.href = url; link.download = 'FM26_newgen_faces_' + stamp + '.zip'; document.body.append(link); link.click(); link.remove();
       setTimeout(function () { URL.revokeObjectURL(url); downloadUrls.delete(url); }, 60000);
-      status('downloadStatus', '새 ZIP 다운로드를 요청했습니다. 유소년 ' + plan.mappings.length + '명 · 사진 ' + plan.assets.length + '장 · ' + sizeText(blob.size) + '. 아래 적용 방법을 확인하세요.');
+      status('downloadStatus', '새 ZIP 다운로드를 요청했습니다. 유소년 ' + plan.mappings.length + '명 · 사진 ' + plan.assets.length + '장 · ' + sizeText(blob.size) + '. config.xml과 고유 이름 PNG를 같은 폴더에 두세요.');
     } catch (error) { status('downloadStatus', error.message || 'ZIP을 만들지 못했습니다.', true); }
     finally { setBusy(false); }
   });

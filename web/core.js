@@ -64,10 +64,13 @@
     return bytes;
   }
 
-  function makePlan(ids, photoIndexes, photos) {
+  function makePlan(ids, photoIndexes, photos, options) {
     if (!Array.isArray(ids) || !Array.isArray(photoIndexes) || !Array.isArray(photos)) {
       throw new Error('사진 연결 정보가 올바르지 않습니다.');
     }
+    const targetType = options && options.targetType !== undefined ? options.targetType : 'generated';
+    if (!['generated', 'database'].includes(targetType)) throw new Error('선수 종류는 생성 선수 또는 기본 DB 선수로 선택하세요.');
+    const prefix = targetType === 'generated' ? 'r-' : '';
     const canonicalIds = parseIds(ids.join('\n'));
     if (canonicalIds.length !== ids.length || photoIndexes.length !== ids.length) {
       throw new Error('선수 ID와 사진 연결 개수가 다릅니다.');
@@ -88,13 +91,16 @@
         }
         totalPhotoBytes += photo.size;
         if (totalPhotoBytes > MAX_TOTAL_BYTES) throw new Error('선택한 사진 합계가 128MiB를 넘습니다. 인원을 나누어 만들어 주세요.');
-        const path = 'faces/face_' + String(assets.length + 1).padStart(4, '0') + '.png';
+        // FM26 graphics reports recommend distinct image basenames. Keep each
+        // copied PNG beside config.xml and identify it by the first actual
+        // player ID using it; shared source photos are still copied once.
+        const path = 'fm26_celeb_' + id + '.png';
         safeZipPath(path);
         asset = { sourceIndex: sourceIndex, path: path, from: path.slice(0, -4) };
         assets.push(asset);
         bySource.set(sourceIndex, asset);
       }
-      return { id: id, sourceIndex: sourceIndex, from: asset.from, to: 'graphics/pictures/person/r-' + id + '/portrait' };
+      return { id: id, sourceIndex: sourceIndex, from: asset.from, to: 'graphics/pictures/person/' + prefix + id + '/portrait' };
     });
     const lines = [
       '<?xml version="1.0" encoding="UTF-8"?>',
