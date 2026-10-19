@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+  <boolean id="preload" value="false"/>
+  <boolean id="amap" value="false"/>
+  <list id="maps">
+    <record from="fm26_probe_2002079023" to="graphics/pictures/person/r-2002079023/portrait"/>
+    <record from="fm26_probe_2002079023" to="graphics/pictures/person/2002079023/portrait"/>
+  </list>
+</record>
